@@ -20,16 +20,16 @@ public class User {
 
   public static User of(UserDto user) {
     return User.builder()
-            .username(user.getUsername())
-            .firstName(user.getFirstName())
-            .lastName(user.getLastName())
+            .username(user.username())
+            .firstName(user.firstName())
+            .lastName(user.lastName())
             .createdAt(LocalDateTime.now())
             .build();
   }
 
   public User update(UserDto user) {
-    this.firstName = user.getFirstName();
-    this.lastName = user.getLastName();
+    this.firstName = user.firstName();
+    this.lastName = user.lastName();
     this.createdAt = LocalDateTime.now();
     return this;
   }

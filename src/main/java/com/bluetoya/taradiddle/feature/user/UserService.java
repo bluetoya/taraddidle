@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public User update(UserDto user) {
-        User updatedUser = userRepository.findByUsername(user.getUsername());
+        User updatedUser = userRepository.findByUsername(user.username());
         return userRepository.save(updatedUser.update(user));
     }
 
