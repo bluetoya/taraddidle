@@ -1,2 +1,25 @@
-### 사용자 가져오기
+### 유저 가져오기
 GET {{url}}/users/seeker731
+
+### 유저 생성
+POST {{url}}/users
+Content-Type: application/json
+
+{
+  "username": "BestChestKing1",
+  "firstName": "Ron",
+  "lastName": "Weasley"
+}
+
+### 유저 업데이트
+PUT {{url}}/users
+Content-Type: application/json
+
+{
+  "username": "BestChestKing1",
+  "firstName": "Ronald",
+  "lastName": "Weasley"
+}
+
+### 유저 삭제
+DELETE {{url}}/users/BestChestKing1
