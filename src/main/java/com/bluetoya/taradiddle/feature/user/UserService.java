@@ -17,12 +17,17 @@ public class UserService {
         return userRepository.save(User.of(user));
     }
 
-    public User update(UserDto user) {
-        User updatedUser = userRepository.findByUsername(user.username());
-        return userRepository.save(updatedUser.update(user));
+    public User update(UserDto updatedUser) {
+        User user = userRepository.findByUsername(updatedUser.username());
+        return userRepository.save(user.update(updatedUser));
     }
 
     public void delete(String username) {
         userRepository.deleteByUsername(username);
+    }
+
+    public User addFriend(String username, FriendDto friend) {
+        User user = userRepository.findByUsername(username);
+        return userRepository.save(user.addFriend(friend.name()));
     }
 }

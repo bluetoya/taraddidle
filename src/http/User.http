@@ -1,14 +1,14 @@
 ### 유저 가져오기
-GET {{url}}/users/seeker731
+GET {{url}}/users/boltscar731
 
 ### 유저 생성
 POST {{url}}/users
 Content-Type: application/json
 
 {
-  "username": "botanyLoverBoy",
-  "firstName": "Neville",
-  "lastName": "Longbottom"
+  "username": "boltscar731",
+  "firstName": "Harry",
+  "lastName": "Potter"
 }
 
 ### 유저 업데이트
@@ -17,9 +17,18 @@ Content-Type: application/json
 
 {
   "username": "BestChestKing1",
-  "firstName": "Ronald",
+  "firstName": "Ron",
   "lastName": "Weasley"
 }
 
 ### 유저 삭제
-DELETE {{url}}/users/BestChestKing1
+DELETE {{url}}/users/boltscar731
+
+
+### 친구 추가
+PATCH {{url}}/users/boltscar731
+Content-Type: application/json
+
+{
+  "name": "catgirl09"
+}
