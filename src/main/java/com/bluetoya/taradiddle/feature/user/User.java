@@ -15,12 +15,17 @@ public class User {
   private String firstName;
   private String lastName;
 
-  public static User ofMock() {
+  public static User of(UserDto user) {
     return User.builder()
-        .id("mockId")
-        .username("mockUsername")
-        .firstName("mockFirstName")
-        .lastName("mockLastName")
-        .build();
+            .username(user.getUsername())
+            .firstName(user.getFirstName())
+            .lastName(user.getLastName())
+            .build();
+  }
+
+  public User update(UserDto user) {
+    this.firstName = user.getFirstName();
+    this.lastName = user.getLastName();
+    return this;
   }
 }

@@ -1,10 +1,7 @@
 package com.bluetoya.taradiddle.feature.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -16,5 +13,20 @@ public class UserController {
     @GetMapping("/{username}")
     public User getUser(@PathVariable String username) {
         return userService.getUser(username);
+    }
+
+    @PostMapping
+    public User create(@RequestBody UserDto user) {
+        return userService.create(user);
+    }
+
+    @PutMapping
+    public User update(@RequestBody UserDto user) {
+        return userService.update(user);
+    }
+
+    @DeleteMapping("/{username}")
+    public void delete(@PathVariable String username) {
+        userService.delete(username);
     }
 }
