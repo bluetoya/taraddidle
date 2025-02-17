@@ -6,9 +6,9 @@ POST {{url}}/users
 Content-Type: application/json
 
 {
-  "username": "BestChestKing1",
-  "firstName": "Ron",
-  "lastName": "Weasley"
+  "username": "botanyLoverBoy",
+  "firstName": "Neville",
+  "lastName": "Longbottom"
 }
 
 ### 유저 업데이트
