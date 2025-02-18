@@ -42,4 +42,9 @@ public class User {
     this.friends.add(friend);
     return this;
   }
+
+  public User removeFriend(String name) {
+    this.friends.remove(name);
+    return this;
+  }
 }

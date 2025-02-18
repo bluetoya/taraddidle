@@ -26,8 +26,4 @@ public class UserService {
         userRepository.deleteByUsername(username);
     }
 
-    public User addFriend(String username, FriendDto friend) {
-        User user = userRepository.findByUsername(username);
-        return userRepository.save(user.addFriend(friend.name()));
-    }
 }

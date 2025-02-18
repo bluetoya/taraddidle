@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class FriendController {
 
-    private final UserService userService;
+    private final FriendService friendService;
 
     @PatchMapping("/{username}")
     public User addFriend(@PathVariable String username, @RequestBody FriendDto friend) {
-        return userService.addFriend(username, friend);
+        return friendService.addFriend(username, friend);
+    }
+
+    @DeleteMapping("/{username}")
+    public User remove(@PathVariable String username, @RequestBody FriendDto friend) {
+        return friendService.removeFriend(username, friend);
     }
 
 }
