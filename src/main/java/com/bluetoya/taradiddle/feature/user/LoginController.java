@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class LoginController {
 
-    private final UserService userService;
-
     @GetMapping
     public String login() {
         return "login";
