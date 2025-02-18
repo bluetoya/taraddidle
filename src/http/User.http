@@ -6,9 +6,9 @@ POST {{url}}/users
 Content-Type: application/json
 
 {
-  "username": "boltscar731",
-  "firstName": "Harry",
-  "lastName": "Potter"
+  "username": "plantLoverBoy",
+  "firstName": "Neville",
+  "lastName": "Longbottom"
 }
 
 ### 유저 업데이트
@@ -25,10 +25,4 @@ Content-Type: application/json
 DELETE {{url}}/users/boltscar731
 
 
-### 친구 추가
-PATCH {{url}}/users/boltscar731
-Content-Type: application/json
 
-{
-  "name": "catgirl09"
-}

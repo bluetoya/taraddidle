@@ -1,0 +1,7 @@
+### 친구 추가
+PATCH {{url}}/friends/boltscar731
+Content-Type: application/json
+
+{
+  "name": "plantLoverBoy"
+}

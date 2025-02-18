@@ -29,9 +29,4 @@ public class UserController {
     public void delete(@PathVariable String username) {
         userService.delete(username);
     }
-
-    @PatchMapping("/{username}")
-    public User addFriend(@PathVariable String username, @RequestBody FriendDto friend) {
-        return userService.addFriend(username, friend);
-    }
 }
