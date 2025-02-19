@@ -16,6 +16,7 @@ public class User {
 
   @Id private String id;
   private String username;
+  private String password;
   private String firstName;
   private String lastName;
   private List<String> friends;
@@ -24,6 +25,7 @@ public class User {
   public static User of(UserDto user) {
     return User.builder()
         .username(user.username())
+        .password(user.password())
         .firstName(user.firstName())
         .lastName(user.lastName())
         .friends(Collections.emptyList())
