@@ -1,4 +1,4 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.auth;
 
 public record AuthRequest(String username, String password, String passwordConfirmation) {
 

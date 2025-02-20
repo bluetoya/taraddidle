@@ -1,4 +1,4 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.auth;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
