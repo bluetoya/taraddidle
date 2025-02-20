@@ -1,0 +1,24 @@
+<body class="text-center">
+<form class="form-signin" th:action="@{/auth/sign-in}" method="post" th:object="${authRequest}">
+  <h1 class="h3 mb-3 font-weight-normal">Sign in now!</h1>
+
+  <div>
+    <label for="username" class="sr-only">username</label>
+    <input type="text" id="username" th:classappend="${#fields.hasErrors('username')} ? 'is-invalid'" name="username" class="form-control" required autofocus>
+  </div>
+  <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+    username is already in use
+  </div>
+
+  <div>
+    <label for="password" class="sr-only">password</label>
+    <input type="password" id="password" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'" name="password" class="form-control" placeholder="password" required>
+  </div>
+
+  <div>
+    <label for="password" class="sr-only">password_confirm</label>
+    <input type="password" id="password_confirm" name="password_confirm" class="form-control" placeholder="password_confirm" required>
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</form>
