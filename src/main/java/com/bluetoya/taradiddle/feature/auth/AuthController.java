@@ -1,7 +1,6 @@
 package com.bluetoya.taradiddle.feature.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,8 +14,7 @@ public class AuthController {
     }
 
     @GetMapping("/sign-in")
-    public String signIn(Model model) {
-    model.addAttribute("authRequest", new AuthRequest());
+    public String signIn(AuthRequest authRequest) {
         return null;
     }
 
