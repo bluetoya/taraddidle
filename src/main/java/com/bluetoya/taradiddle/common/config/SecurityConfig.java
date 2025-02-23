@@ -17,23 +17,26 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-  private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-  @Bean
-  public BCryptPasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-  }
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-  @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-        .formLogin(AbstractHttpConfigurer::disable)
-        .logout(AbstractHttpConfigurer::disable)
-        .csrf(AbstractHttpConfigurer::disable)
-        .sessionManagement(
-            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(
+                requests -> requests
+                    .requestMatchers("/auth/login", "/auth/sign-in").permitAll()
+                    .anyRequest().authenticated())
+            .formLogin(AbstractHttpConfigurer::disable)
+            .logout(AbstractHttpConfigurer::disable)
+            .csrf(AbstractHttpConfigurer::disable)
+            .sessionManagement(
+                session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
-    return http.build();
-  }
+        return http.build();
+    }
 }
