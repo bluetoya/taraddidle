@@ -21,11 +21,11 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping("/sign-in")
-    public String signIn(Model model) {
-        model.addAttribute("authRequest", new AuthRequest());
-        return "signIn";
-    }
+//    @GetMapping("/sign-in")
+//    public String signIn(Model model) {
+//        model.addAttribute("authRequest", new LoginRequest());
+//        return "signIn";
+//    }
 
     @GetMapping("/logout")
     public String logout() {
