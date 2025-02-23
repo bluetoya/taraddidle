@@ -5,3 +5,6 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/taradiddle
+jwt:
+  secret-key: dGxmdGxya3Njb3hsZHhrZmtlbGVtZg==
+  expiration: 25200000
