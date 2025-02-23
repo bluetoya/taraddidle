@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
+    private final AuthService authService;
+
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        return null;
+    public LoginResponse login(@RequestParam String userId, @RequestParam String password) {
+        return authService.login(userId, password);
     }
 
     @GetMapping("/sign-in")
-    public String signIn(AuthRequest authRequest) {
+    public String signIn(LoginRequest loginRequest) {
         return null;
     }
 
