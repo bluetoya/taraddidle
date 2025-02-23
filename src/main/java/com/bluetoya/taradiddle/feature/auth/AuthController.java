@@ -10,14 +10,15 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public LoginResponse login(@RequestParam String userId, @RequestParam String password) {
         return authService.login(userId, password);
     }
 
-    @GetMapping("/sign-in")
-    public String signIn(LoginRequest loginRequest) {
-        return null;
+    // TODO :: 회원가입 시 유저의 다른 정보도 저장하도록 하자 (AuthUser와 User mapping 필요)
+    @PostMapping("/sign-in")
+    public SignInResponse signIn(final @RequestBody SignInRequest request) {
+        return authService.signIn(request);
     }
 
 }
