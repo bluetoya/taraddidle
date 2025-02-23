@@ -28,6 +28,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation "org.springframework.boot:spring-boot-starter-security"
+
+	ext {
+		JJWT_VERSION = "0.12.6"
+	}
+
+	implementation "io.jsonwebtoken:jjwt-api:${JJWT_VERSION}"
+	runtimeOnly "io.jsonwebtoken:jjwt-gson:${JJWT_VERSION}"
+	runtimeOnly "io.jsonwebtoken:jjwt-impl:${JJWT_VERSION}"
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
