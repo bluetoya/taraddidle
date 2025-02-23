@@ -23,6 +23,3 @@ Content-Type: application/json
 
 ### 유저 삭제
 DELETE {{url}}/users/boltscar731
-
-
-
