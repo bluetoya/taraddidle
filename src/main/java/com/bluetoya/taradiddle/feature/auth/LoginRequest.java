@@ -1,3 +1,5 @@
 package com.bluetoya.taradiddle.feature.auth;
 
-public record LoginRequest(String userId, String password) {}
+public record LoginRequest(String userId, String password) {
+
+}
