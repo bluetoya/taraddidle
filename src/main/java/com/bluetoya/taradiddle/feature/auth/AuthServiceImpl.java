@@ -52,6 +52,7 @@ public class AuthServiceImpl implements AuthService {
 
     // TODO :: 로그인 시 필요한 validation 추가
     authRepository.save(Auth.of(request));
+    return new SignInResponse("ok");
   }
 
   private boolean isPasswordCorrect(SignInRequest request) {
