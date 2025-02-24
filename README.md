@@ -1,5 +1,7 @@
 # taraddidle
 A witty, real-time chat &amp; message storage system using MongoDB
 
-# Controller
-- UserController: 유저 컨트롤러
+# features
+- user : 사용자
+- friend: 친구
+- jwt : jwt로 로그인 사용자 관리
