@@ -1,8 +1,8 @@
 package com.bluetoya.taradiddle.feature.auth;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+public interface AuthService {
 
-@Service
-@RequiredArgsConstructor
-public class AuthService {}
+    LoginResponse login(String userId, String password);
+
+    SignInResponse signIn(SignInRequest request);
+}

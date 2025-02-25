@@ -1,6 +1,7 @@
 ### 친구 추가
 PATCH {{url}}/friends/boltscar731
 Content-Type: application/json
+Authorization: Bearer
 
 {
   "name": "plantLoverBoy"
@@ -9,6 +10,7 @@ Content-Type: application/json
 ### 친구 삭제
 DELETE {{url}}/friends/boltscar731
 Content-Type: application/json
+Authorization: Bearer
 
 {
   "name": "plantLoverBoy"

@@ -8,14 +8,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        return null;
+    private final AuthService authService;
+
+    @GetMapping("/login")
+    public LoginResponse login(@RequestParam String userId, @RequestParam String password) {
+        return authService.login(userId, password);
     }
 
-    @GetMapping("/sign-in")
-    public String signIn(AuthRequest authRequest) {
-        return null;
+    // TODO :: 회원가입 시 유저의 다른 정보도 저장하도록 하자 (AuthUser와 User mapping 필요)
+    @PostMapping("/sign-in")
+    public SignInResponse signIn(final @RequestBody SignInRequest request) {
+        return authService.signIn(request);
     }
 
 }

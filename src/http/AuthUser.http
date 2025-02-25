@@ -1,0 +1,15 @@
+### 로그인
+GET {{url}}/auth/login?userId=fredg@hogwarts.owl&password=grifrules
+
+### 회원가입
+POST {{url}}/auth/sign-in
+Content-Type: application/json
+
+{
+  "userId": "fredg@hogwarts.owl",
+  "password": "grifrules",
+  "confirmPassword": "grifrules",
+  "username": "iamGeorge",
+  "firstName": "Fred",
+  "lastName": "Weasley"
+}

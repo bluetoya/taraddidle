@@ -1,9 +1,11 @@
 ### 유저 가져오기
 GET {{url}}/users/boltscar731
+Authorization: Bearer
 
 ### 유저 생성
 POST {{url}}/users
 Content-Type: application/json
+Authorization: Bearer
 
 {
   "username": "plantLoverBoy",
@@ -14,6 +16,7 @@ Content-Type: application/json
 ### 유저 업데이트
 PUT {{url}}/users
 Content-Type: application/json
+Authorization: Bearer
 
 {
   "username": "BestChestKing1",
@@ -23,3 +26,4 @@ Content-Type: application/json
 
 ### 유저 삭제
 DELETE {{url}}/users/boltscar731
+Authorization: Bearer
