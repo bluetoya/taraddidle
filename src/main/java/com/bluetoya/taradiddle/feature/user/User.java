@@ -22,6 +22,7 @@ public class User {
     private String lastName;
     private List<String> friends;
     private LocalDateTime createdAt;
+    private String authId;
 
     public static User of(UserDto user) {
         return User.builder()
@@ -30,6 +31,7 @@ public class User {
             .lastName(user.lastName())
             .friends(Collections.emptyList())
             .createdAt(DateUtil.now())
+            .authId(user.authId())
             .build();
     }
 
