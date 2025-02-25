@@ -3,6 +3,9 @@ package com.bluetoya.taradiddle.feature.auth;
 import com.bluetoya.taradiddle.common.config.JwtProvider;
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
+import com.bluetoya.taradiddle.feature.user.User;
+import com.bluetoya.taradiddle.feature.user.UserDto;
+import com.bluetoya.taradiddle.feature.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,8 @@ public class AuthServiceImpl implements AuthService {
     private final JwtProvider jwtProvider;
 
     private final AuthRepository authRepository;
+
+    private final UserService userService;
 
     @Override
     public LoginResponse login(String userId, String password) {
@@ -50,10 +55,10 @@ public class AuthServiceImpl implements AuthService {
         String encryptedPassword = bCryptPasswordEncoder.encode(request.password());
 
         AuthUser authUser = authRepository.save(AuthUser.of(request.userId(), encryptedPassword));
-        // TODO :: authUser 생성 후 user도 생성해서 키로 매핑
+        User user = userService.create(new UserDto(request.username(), request.firstName(),
+            request.lastName(), authUser.getId()));
 
-        // TODO :: authUser와 user 내용도 같이 반환
-        return new SignInResponse("ok");
+        return new SignInResponse(authUser, user);
     }
 
     private boolean isPasswordCorrect(SignInRequest request) {

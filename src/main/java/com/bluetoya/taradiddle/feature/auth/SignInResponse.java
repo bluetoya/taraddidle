@@ -1,5 +1,7 @@
 package com.bluetoya.taradiddle.feature.auth;
 
-public record SignInResponse(String message) {
+import com.bluetoya.taradiddle.feature.user.User;
+
+public record SignInResponse(AuthUser authUser, User user) {
 
 }
