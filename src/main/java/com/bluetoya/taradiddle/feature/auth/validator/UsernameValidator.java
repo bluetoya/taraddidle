@@ -1,4 +1,6 @@
-package com.bluetoya.taradiddle.feature.auth;
+package com.bluetoya.taradiddle.feature.auth.validator;
+
+import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 
 public class UsernameValidator implements Validator<SignInRequest> {
 

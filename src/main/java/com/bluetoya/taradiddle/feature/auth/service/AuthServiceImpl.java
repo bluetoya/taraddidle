@@ -1,8 +1,13 @@
-package com.bluetoya.taradiddle.feature.auth;
+package com.bluetoya.taradiddle.feature.auth.service;
 
 import com.bluetoya.taradiddle.common.config.JwtProvider;
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
+import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
+import com.bluetoya.taradiddle.feature.auth.entity.AuthUser;
+import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
+import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
+import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.user.User;
 import com.bluetoya.taradiddle.feature.user.UserDto;
 import com.bluetoya.taradiddle.feature.user.UserService;

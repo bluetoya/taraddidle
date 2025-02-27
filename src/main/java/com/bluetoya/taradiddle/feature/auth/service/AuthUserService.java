@@ -1,5 +1,7 @@
-package com.bluetoya.taradiddle.feature.auth;
+package com.bluetoya.taradiddle.feature.auth.service;
 
+import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
+import com.bluetoya.taradiddle.feature.auth.entity.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

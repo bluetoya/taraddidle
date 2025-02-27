@@ -1,5 +1,9 @@
-package com.bluetoya.taradiddle.feature.auth;
+package com.bluetoya.taradiddle.feature.auth.controller;
 
+import com.bluetoya.taradiddle.feature.auth.service.AuthService;
+import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
+import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
+import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

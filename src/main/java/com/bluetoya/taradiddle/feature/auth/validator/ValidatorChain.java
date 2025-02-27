@@ -1,4 +1,4 @@
-package com.bluetoya.taradiddle.feature.auth;
+package com.bluetoya.taradiddle.feature.auth.validator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,14 @@
-package com.bluetoya.taradiddle.feature.auth;
+package com.bluetoya.taradiddle.feature.auth.validator;
 
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
+import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 
 public class PasswordValidator implements Validator<SignInRequest> {
 
     @Override
     public void validate(SignInRequest request) {
-        if (!isPasswordCorrect(request)) {
+        if (!isMatch(request)) {
             throw new CustomException(AuthErrorCode.UNMATCHED_PASSWORD);
         }
 
@@ -21,7 +22,7 @@ public class PasswordValidator implements Validator<SignInRequest> {
 //        - password > 1234나 qwer 같은 연속되는 문자 블록
     }
 
-    private boolean isPasswordCorrect(SignInRequest request) {
+    private boolean isMatch(SignInRequest request) {
         return request.password().equals(request.confirmPassword());
     }
 }

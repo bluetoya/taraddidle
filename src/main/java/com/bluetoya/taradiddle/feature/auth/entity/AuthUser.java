@@ -1,4 +1,4 @@
-package com.bluetoya.taradiddle.feature.auth;
+package com.bluetoya.taradiddle.feature.auth.entity;
 
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import java.time.LocalDateTime;
