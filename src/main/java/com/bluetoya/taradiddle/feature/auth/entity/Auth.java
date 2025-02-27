@@ -9,17 +9,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Builder
-@Document(collection = "authUsers")
-public class AuthUser {
+@Document(collection = "auth")
+public class Auth {
 
     @Id
     private String id;
     private String userId;
     private String password;
-    private LocalDateTime signInTime;
+    private LocalDateTime signInDate;
 
-    public static AuthUser of(String userId, String password) {
-        return AuthUser.builder().userId(userId).password(password).signInTime(DateUtil.now())
+    public static Auth of(String userId, String password) {
+        return Auth.builder().userId(userId).password(password).signInDate(DateUtil.now())
             .build();
     }
 }

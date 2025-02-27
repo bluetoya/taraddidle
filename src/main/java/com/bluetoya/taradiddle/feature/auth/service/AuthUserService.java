@@ -1,7 +1,7 @@
 package com.bluetoya.taradiddle.feature.auth.service;
 
 import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
-import com.bluetoya.taradiddle.feature.auth.entity.AuthUser;
+import com.bluetoya.taradiddle.feature.auth.entity.Auth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ public class AuthUserService {
 
     private final AuthRepository authRepository;
 
-    public AuthUser getAuthUser(String userId) {
+    public Auth getAuthUser(String userId) {
         return authRepository.findByUserId(userId);
     }
 }

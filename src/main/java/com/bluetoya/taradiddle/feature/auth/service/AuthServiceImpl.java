@@ -5,7 +5,7 @@ import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
 import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
-import com.bluetoya.taradiddle.feature.auth.entity.AuthUser;
+import com.bluetoya.taradiddle.feature.auth.entity.Auth;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
@@ -38,19 +38,19 @@ public class AuthServiceImpl implements AuthService {
     }
 
     private void validateLogin(LoginRequest request) {
-        AuthUser authUser = authRepository.findByUserId(request.userId());
+        Auth auth = authRepository.findByUserId(request.userId());
 
-        if (!isUserExists(authUser)) {
+        if (!isUserExists(auth)) {
             throw new CustomException(AuthErrorCode.USER_ID_NOT_FOUND);
         }
 
-        if (!bCryptPasswordEncoder.matches(request.password(), authUser.getPassword())) {
+        if (!bCryptPasswordEncoder.matches(request.password(), auth.getPassword())) {
             throw new CustomException(AuthErrorCode.WRONG_PASSWORD);
         }
     }
 
-    private boolean isUserExists(AuthUser authUser) {
-        return Objects.nonNull(authUser);
+    private boolean isUserExists(Auth auth) {
+        return Objects.nonNull(auth);
     }
 
     @Override
@@ -61,11 +61,11 @@ public class AuthServiceImpl implements AuthService {
 
         String encryptedPassword = bCryptPasswordEncoder.encode(request.password());
 
-        AuthUser authUser = authRepository.save(AuthUser.of(request.userId(), encryptedPassword));
+        Auth auth = authRepository.save(Auth.of(request.userId(), encryptedPassword));
         User user = userService.create(new UserDto(request.username(), request.firstName(),
-            request.lastName(), authUser.getId()));
+            request.lastName(), auth.getId()));
 
-        return new SignInResponse(authUser, user);
+        return new SignInResponse(auth, user);
     }
 
     private boolean isPasswordCorrect(SignInRequest request) {
