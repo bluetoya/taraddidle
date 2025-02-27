@@ -1,4 +1,4 @@
-package com.bluetoya.taradiddle.common.config;
+package com.bluetoya.taradiddle.common.security;
 
 import com.bluetoya.taradiddle.common.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;

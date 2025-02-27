@@ -1,6 +1,6 @@
 package com.bluetoya.taradiddle.common.filter;
 
-import com.bluetoya.taradiddle.common.config.JwtProvider;
+import com.bluetoya.taradiddle.common.security.JwtProvider;
 import com.bluetoya.taradiddle.feature.auth.entity.AuthUser;
 import com.bluetoya.taradiddle.feature.auth.service.AuthUserService;
 import jakarta.servlet.FilterChain;
