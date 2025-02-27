@@ -26,6 +26,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginResponse login(String userId, String password) {
+        validateLogin(userId, password);
+
+        return new LoginResponse(jwtProvider.generateAccessToken(userId));
+    }
+
+    private void validateLogin(String userId, String password) {
         AuthUser authUser = authRepository.findByUserId(userId);
 
         if (!isUserExists(authUser)) {
@@ -35,8 +41,6 @@ public class AuthServiceImpl implements AuthService {
         if (!bCryptPasswordEncoder.matches(password, authUser.getPassword())) {
             throw new CustomException(AuthErrorCode.WRONG_PASSWORD);
         }
-
-        return new LoginResponse(jwtProvider.generateAccessToken(userId));
     }
 
     private boolean isUserExists(AuthUser authUser) {
@@ -45,9 +49,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public SignInResponse signIn(SignInRequest request) {
-        // TODO :: 입력한 아이디 유효성 검사
-        // TODO :: 비밀번호 길이나 조합 내역 검사
-
         if (!isPasswordCorrect(request)) {
             throw new CustomException(AuthErrorCode.UNMATCHED_PASSWORD);
         }
