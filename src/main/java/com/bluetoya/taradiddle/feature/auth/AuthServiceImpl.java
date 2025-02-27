@@ -26,21 +26,21 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginResponse login(String userId, String password) {
-        AuthUser authUser = authRepository.findByUserId(userId);
+        Auth auth = authRepository.findByUserId(userId);
 
-        if (!isUserExists(authUser)) {
+        if (!isUserExists(auth)) {
             throw new CustomException(AuthErrorCode.USER_ID_NOT_FOUND);
         }
 
-        if (!bCryptPasswordEncoder.matches(password, authUser.getPassword())) {
+        if (!bCryptPasswordEncoder.matches(password, auth.getPassword())) {
             throw new CustomException(AuthErrorCode.WRONG_PASSWORD);
         }
 
         return new LoginResponse(jwtProvider.generateAccessToken(userId));
     }
 
-    private boolean isUserExists(AuthUser authUser) {
-        return Objects.nonNull(authUser);
+    private boolean isUserExists(Auth auth) {
+        return Objects.nonNull(auth);
     }
 
     @Override
@@ -54,11 +54,11 @@ public class AuthServiceImpl implements AuthService {
 
         String encryptedPassword = bCryptPasswordEncoder.encode(request.password());
 
-        AuthUser authUser = authRepository.save(AuthUser.of(request.userId(), encryptedPassword));
+        Auth auth = authRepository.save(Auth.of(request.userId(), encryptedPassword));
         User user = userService.create(new UserDto(request.username(), request.firstName(),
-            request.lastName(), authUser.getId()));
+            request.lastName(), auth.getId()));
 
-        return new SignInResponse(authUser, user);
+        return new SignInResponse(auth, user);
     }
 
     private boolean isPasswordCorrect(SignInRequest request) {

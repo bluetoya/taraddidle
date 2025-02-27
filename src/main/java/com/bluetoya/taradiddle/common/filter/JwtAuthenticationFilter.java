@@ -1,7 +1,7 @@
 package com.bluetoya.taradiddle.common.filter;
 
 import com.bluetoya.taradiddle.common.config.JwtProvider;
-import com.bluetoya.taradiddle.feature.auth.AuthUser;
+import com.bluetoya.taradiddle.feature.auth.Auth;
 import com.bluetoya.taradiddle.feature.auth.AuthUserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -44,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String userId) {
-        AuthUser authUser = authUserService.getAuthUser(userId);
-        return new UsernamePasswordAuthenticationToken(authUser.getUserId(), authUser.getPassword(), null);
+        Auth auth = authUserService.getAuthUser(userId);
+        return new UsernamePasswordAuthenticationToken(auth.getUserId(), auth.getPassword(), null);
     }
 }

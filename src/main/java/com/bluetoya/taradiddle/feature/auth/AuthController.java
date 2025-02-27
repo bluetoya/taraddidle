@@ -15,7 +15,6 @@ public class AuthController {
         return authService.login(userId, password);
     }
 
-    // TODO :: 회원가입 시 유저의 다른 정보도 저장하도록 하자 (AuthUser와 User mapping 필요)
     @PostMapping("/sign-in")
     public SignInResponse signIn(final @RequestBody SignInRequest request) {
         return authService.signIn(request);

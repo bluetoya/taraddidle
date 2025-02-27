@@ -9,7 +9,7 @@ public class AuthUserService {
 
     private final AuthRepository authRepository;
 
-    public AuthUser getAuthUser(String userId) {
+    public Auth getAuthUser(String userId) {
         return authRepository.findByUserId(userId);
     }
 }
