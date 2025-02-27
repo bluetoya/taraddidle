@@ -1,5 +1,6 @@
 package com.bluetoya.taradiddle.feature.auth.controller;
 
+import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
 import com.bluetoya.taradiddle.feature.auth.service.AuthService;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
@@ -15,8 +16,8 @@ public class AuthController {
     private final AuthService authService;
 
     @GetMapping("/login")
-    public LoginResponse login(@RequestParam String userId, @RequestParam String password) {
-        return authService.login(userId, password);
+    public LoginResponse login(final @RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 
     @PostMapping("/sign-in")

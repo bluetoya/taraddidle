@@ -3,6 +3,7 @@ package com.bluetoya.taradiddle.feature.auth.service;
 import com.bluetoya.taradiddle.common.config.JwtProvider;
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
+import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
 import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
 import com.bluetoya.taradiddle.feature.auth.entity.AuthUser;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
@@ -30,20 +31,20 @@ public class AuthServiceImpl implements AuthService {
     private final UserService userService;
 
     @Override
-    public LoginResponse login(String userId, String password) {
-        validateLogin(userId, password);
+    public LoginResponse login(LoginRequest request) {
+        validateLogin(request);
 
-        return new LoginResponse(jwtProvider.generateAccessToken(userId));
+        return new LoginResponse(jwtProvider.generateAccessToken(request.userId()));
     }
 
-    private void validateLogin(String userId, String password) {
-        AuthUser authUser = authRepository.findByUserId(userId);
+    private void validateLogin(LoginRequest request) {
+        AuthUser authUser = authRepository.findByUserId(request.userId());
 
         if (!isUserExists(authUser)) {
             throw new CustomException(AuthErrorCode.USER_ID_NOT_FOUND);
         }
 
-        if (!bCryptPasswordEncoder.matches(password, authUser.getPassword())) {
+        if (!bCryptPasswordEncoder.matches(request.password(), authUser.getPassword())) {
             throw new CustomException(AuthErrorCode.WRONG_PASSWORD);
         }
     }
