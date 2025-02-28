@@ -1,5 +1,11 @@
 ### 로그인
-GET {{url}}/auth/login?userId=&password=
+GET {{url}}/auth/login
+Content-Type: application/json
+
+{
+  "userId": "",
+  "password": ""
+}
 
 ### 회원가입
 POST {{url}}/auth/sign-in
@@ -9,7 +15,7 @@ Content-Type: application/json
   "userId": "",
   "password": "",
   "confirmPassword": "",
-  "username": "iamGeorge",
-  "firstName": "Fred",
-  "lastName": "Weasley"
+  "username": "",
+  "firstName": "",
+  "lastName": ""
 }

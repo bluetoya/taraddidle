@@ -1,5 +1,5 @@
 ### 유저 가져오기
-GET {{url}}/users/boltscar731
+GET {{url}}/users/boltscar713
 Authorization: Bearer
 
 ### 유저 생성

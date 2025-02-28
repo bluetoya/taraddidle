@@ -1,15 +1,14 @@
 package com.bluetoya.taradiddle.common.filter;
 
-import com.bluetoya.taradiddle.common.config.JwtProvider;
-import com.bluetoya.taradiddle.feature.auth.AuthUser;
-import com.bluetoya.taradiddle.feature.auth.AuthUserService;
+import com.bluetoya.taradiddle.common.security.JwtProvider;
+import com.bluetoya.taradiddle.feature.auth.entity.Auth;
+import com.bluetoya.taradiddle.feature.auth.service.AuthUserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final AuthUserService authUserService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+        @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
+        throws ServletException, IOException {
         String token = request.getHeader("Authorization");
         String userId = null;
 
@@ -36,7 +37,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             userId = jwtProvider.getUserIdFromToken(token);
         }
 
-        if (Objects.nonNull(userId) && Objects.isNull(SecurityContextHolder.getContext().getAuthentication())) {
+        if (Objects.nonNull(userId) && Objects.isNull(
+            SecurityContextHolder.getContext().getAuthentication())) {
             SecurityContextHolder.getContext().setAuthentication(getAuthentication(userId));
         }
 
@@ -44,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(String userId) {
-        AuthUser authUser = authUserService.getAuthUser(userId);
-        return new UsernamePasswordAuthenticationToken(authUser.getUserId(), authUser.getPassword(), null);
+        Auth auth = authUserService.getAuthUser(userId);
+        return new UsernamePasswordAuthenticationToken(auth.getUserId(), auth.getPassword(), null);
     }
 }
