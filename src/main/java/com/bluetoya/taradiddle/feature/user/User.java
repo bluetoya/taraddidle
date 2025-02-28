@@ -1,6 +1,7 @@
 package com.bluetoya.taradiddle.feature.user;
 
 import com.bluetoya.taradiddle.common.util.DateUtil;
+import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
@@ -32,6 +33,16 @@ public class User {
             .friends(Collections.emptyList())
             .createdAt(DateUtil.now())
             .authId(user.authId())
+            .build();
+    }
+
+    public static User of(SignInRequest request, String authId) {
+        return User.builder()
+            .username(request.username())
+            .firstName(request.firstName())
+            .lastName(request.lastName())
+            .createdAt(LocalDateTime.now())
+            .authId(authId)
             .build();
     }
 

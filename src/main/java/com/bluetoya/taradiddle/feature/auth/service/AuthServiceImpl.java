@@ -1,15 +1,17 @@
 package com.bluetoya.taradiddle.feature.auth.service;
 
 import com.bluetoya.taradiddle.common.security.JwtProvider;
+import com.bluetoya.taradiddle.feature.auth.dto.AuthDto;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
+import com.bluetoya.taradiddle.feature.auth.dto.UserDto;
 import com.bluetoya.taradiddle.feature.auth.entity.Auth;
 import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
 import com.bluetoya.taradiddle.feature.user.User;
-import com.bluetoya.taradiddle.feature.user.UserDto;
+import com.bluetoya.taradiddle.feature.user.UserRepository;
 import com.bluetoya.taradiddle.feature.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,7 +23,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtProvider jwtProvider;
-    private final UserService userService;
+    private final UserRepository userRepository;
     private final AuthRepository authRepository;
     private final SignInValidator validator;
 
@@ -40,10 +42,9 @@ public class AuthServiceImpl implements AuthService {
         String encryptedPassword = bCryptPasswordEncoder.encode(request.password());
 
         Auth auth = authRepository.save(Auth.of(request.userId(), encryptedPassword));
-        User user = userService.create(new UserDto(request.username(), request.firstName(),
-            request.lastName(), auth.getId()));
+        User user = userRepository.save(User.of(request, auth.getId()));
 
-        return new SignInResponse(auth, user);
+        return new SignInResponse(AuthDto.from(auth), UserDto.from(user));
     }
 
 }
