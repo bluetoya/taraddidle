@@ -9,6 +9,9 @@ import com.bluetoya.taradiddle.feature.auth.entity.Auth;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
+import com.bluetoya.taradiddle.feature.auth.validator.PasswordValidator;
+import com.bluetoya.taradiddle.feature.auth.validator.UsernameValidator;
+import com.bluetoya.taradiddle.feature.auth.validator.ValidatorChain;
 import com.bluetoya.taradiddle.feature.user.User;
 import com.bluetoya.taradiddle.feature.user.UserDto;
 import com.bluetoya.taradiddle.feature.user.UserService;
@@ -55,9 +58,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public SignInResponse signIn(SignInRequest request) {
-        if (!isPasswordCorrect(request)) {
-            throw new CustomException(AuthErrorCode.UNMATCHED_PASSWORD);
-        }
+        validateSignIn(request);
 
         String encryptedPassword = bCryptPasswordEncoder.encode(request.password());
 
@@ -68,7 +69,12 @@ public class AuthServiceImpl implements AuthService {
         return new SignInResponse(auth, user);
     }
 
-    private boolean isPasswordCorrect(SignInRequest request) {
-        return request.password().equals(request.confirmPassword());
+    private void validateSignIn(SignInRequest request) {
+        ValidatorChain<SignInRequest> chain = new ValidatorChain<>();
+        chain.addValidator(new UsernameValidator());
+        chain.addValidator(new PasswordValidator());
+
+        chain.validate(request);
     }
+
 }

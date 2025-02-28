@@ -8,6 +8,10 @@ public class PasswordValidator implements Validator<SignInRequest> {
 
     @Override
     public void validate(SignInRequest request) {
+        if (!isPasswordCorrect(request)) {
+            throw new CustomException(AuthErrorCode.UNMATCHED_PASSWORD);
+        }
+
         if (!isMatch(request)) {
             throw new CustomException(AuthErrorCode.UNMATCHED_PASSWORD);
         }
@@ -16,13 +20,24 @@ public class PasswordValidator implements Validator<SignInRequest> {
             throw new CustomException(AuthErrorCode.NOT_ENOUGH_LENGTH_PASSWORD);
         }
 
-//        - password > 소문자, 대문자, 숫자 조합
-//        - password > 이메일과 동일하면 안 됨
-//        - password > 성이나 이름과 동일하면 안 됨
-//        - password > 1234나 qwer 같은 연속되는 문자 블록
+        if (isNameUsed(request)) {
+            throw new CustomException(AuthErrorCode.PASSWORD_HOLDS_NAME);
+        }
+    }
+
+    private boolean isPasswordCorrect(SignInRequest request) {
+        return request.password().equals(request.confirmPassword());
     }
 
     private boolean isMatch(SignInRequest request) {
         return request.password().equals(request.confirmPassword());
+    }
+
+    private boolean isNameUsed(SignInRequest request) {
+        String lowerCasePassword = request.password().toLowerCase();
+
+        return lowerCasePassword.contains(request.firstName().toLowerCase()) || lowerCasePassword
+            .contains(request.lastName().toLowerCase()) || lowerCasePassword
+            .contains(request.username().substring(0, request.username().indexOf("@")));
     }
 }
