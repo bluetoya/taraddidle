@@ -3,8 +3,8 @@ GET {{url}}/auth/login
 Content-Type: application/json
 
 {
-  "userId": "rweasley@hogwarts.owl",
-  "password": "chessKing1234"
+  "userId": "",
+  "password": ""
 }
 
 ### 회원가입
@@ -12,10 +12,10 @@ POST {{url}}/auth/sign-in
 Content-Type: application/json
 
 {
-  "userId": "rweasley@hogwarts.owl",
-  "password": "chessKing1234",
-  "confirmPassword": "chessKing1234",
-  "username": "BestKeeper1",
-  "firstName": "Ronald",
-  "lastName": "Weasley"
+  "userId": "",
+  "password": "",
+  "confirmPassword": "",
+  "username": "",
+  "firstName": "",
+  "lastName": ""
 }
