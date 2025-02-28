@@ -12,7 +12,6 @@ import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
 import com.bluetoya.taradiddle.feature.user.User;
 import com.bluetoya.taradiddle.feature.user.UserRepository;
-import com.bluetoya.taradiddle.feature.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
