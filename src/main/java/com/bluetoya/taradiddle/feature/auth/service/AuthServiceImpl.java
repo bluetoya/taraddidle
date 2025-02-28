@@ -1,7 +1,5 @@
 package com.bluetoya.taradiddle.feature.auth.service;
 
-import com.bluetoya.taradiddle.common.exception.CustomException;
-import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
 import com.bluetoya.taradiddle.common.security.JwtProvider;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
@@ -9,14 +7,10 @@ import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.auth.entity.Auth;
 import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
-import com.bluetoya.taradiddle.feature.auth.validator.PasswordValidator;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
-import com.bluetoya.taradiddle.feature.auth.validator.UserIdValidator;
-import com.bluetoya.taradiddle.feature.auth.validator.ValidatorChain;
 import com.bluetoya.taradiddle.feature.user.User;
 import com.bluetoya.taradiddle.feature.user.UserDto;
 import com.bluetoya.taradiddle.feature.user.UserService;
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
