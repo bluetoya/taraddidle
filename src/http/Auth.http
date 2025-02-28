@@ -1,0 +1,21 @@
+### 로그인
+GET {{url}}/auth/login
+Content-Type: application/json
+
+{
+  "userId": "rweasley@hogwarts.owl",
+  "password": "chessKing1234"
+}
+
+### 회원가입
+POST {{url}}/auth/sign-in
+Content-Type: application/json
+
+{
+  "userId": "rweasley@hogwarts.owl",
+  "password": "chessKing1234",
+  "confirmPassword": "chessKing1234",
+  "username": "BestKeeper1",
+  "firstName": "Ronald",
+  "lastName": "Weasley"
+}
