@@ -1,5 +1,6 @@
 package com.bluetoya.taradiddle.feature.user;
 
+import com.bluetoya.taradiddle.common.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +12,13 @@ public class FriendController {
     private final FriendService friendService;
 
     @PatchMapping("/{username}")
-    public User addFriend(@PathVariable String username, @RequestBody FriendDto friend) {
-        return friendService.addFriend(username, friend);
+    public ApiResponse<User> addFriend(@PathVariable String username, @RequestBody FriendDto friend) {
+        return new ApiResponse<>(friendService.addFriend(username, friend));
     }
 
     @DeleteMapping("/{username}")
-    public User remove(@PathVariable String username, @RequestBody FriendDto friend) {
-        return friendService.removeFriend(username, friend);
+    public ApiResponse<User> remove(@PathVariable String username, @RequestBody FriendDto friend) {
+        return new ApiResponse<>(friendService.removeFriend(username, friend));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.bluetoya.taradiddle.feature.user;
 
+import com.bluetoya.taradiddle.common.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,13 +12,13 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{username}")
-    public User getUser(@PathVariable String username) {
-        return userService.getUser(username);
+    public ApiResponse<User> getUser(@PathVariable String username) {
+        return new ApiResponse<>(userService.getUser(username));
     }
 
     @PutMapping
-    public User update(@RequestBody UserDto user) {
-        return userService.update(user);
+    public ApiResponse<User> update(@RequestBody UserDto user) {
+        return new ApiResponse<>(userService.update(user));
     }
 
     @DeleteMapping("/{username}")

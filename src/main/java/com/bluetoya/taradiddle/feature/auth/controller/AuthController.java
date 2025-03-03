@@ -1,5 +1,6 @@
 package com.bluetoya.taradiddle.feature.auth.controller;
 
+import com.bluetoya.taradiddle.common.ApiResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
 import com.bluetoya.taradiddle.feature.auth.service.AuthService;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
@@ -16,13 +17,13 @@ public class AuthController {
     private final AuthService authService;
 
     @GetMapping("/login")
-    public LoginResponse login(final @RequestBody LoginRequest request) {
-        return authService.login(request);
+    public ApiResponse<LoginResponse> login(final @RequestBody LoginRequest request) {
+        return new ApiResponse<>(authService.login(request));
     }
 
     @PostMapping("/sign-in")
-    public SignInResponse signIn(final @RequestBody SignInRequest request) {
-        return authService.signIn(request);
+    public ApiResponse<SignInResponse> signIn(final @RequestBody SignInRequest request) {
+        return new ApiResponse<>(authService.signIn(request));
     }
 
 }
