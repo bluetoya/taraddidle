@@ -25,17 +25,6 @@ public class User {
     private LocalDateTime createdAt;
     private String authId;
 
-    public static User of(UserDto user) {
-        return User.builder()
-            .username(user.username())
-            .firstName(user.firstName())
-            .lastName(user.lastName())
-            .friends(Collections.emptyList())
-            .createdAt(DateUtil.now())
-            .authId(user.authId())
-            .build();
-    }
-
     public static User of(SignInRequest request, String authId) {
         return User.builder()
             .username(request.username())

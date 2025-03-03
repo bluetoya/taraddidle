@@ -13,10 +13,6 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
-    public User create(UserDto user) {
-        return userRepository.save(User.of(user));
-    }
-
     public User update(UserDto updatedUser) {
         User user = userRepository.findByUsername(updatedUser.username());
         return userRepository.save(user.update(updatedUser));
