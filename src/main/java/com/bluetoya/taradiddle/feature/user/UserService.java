@@ -1,6 +1,5 @@
 package com.bluetoya.taradiddle.feature.user;
 
-import com.bluetoya.taradiddle.feature.auth.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,12 +1,10 @@
-package com.bluetoya.taradiddle.feature.auth.dto;
+package com.bluetoya.taradiddle.feature.user;
 
-import com.bluetoya.taradiddle.feature.user.User;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NonNull;
 
 @Getter
 @Builder

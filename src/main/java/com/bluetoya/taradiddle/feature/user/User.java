@@ -2,14 +2,12 @@ package com.bluetoya.taradiddle.feature.user;
 
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
-import com.bluetoya.taradiddle.feature.auth.dto.UserDto;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Builder
