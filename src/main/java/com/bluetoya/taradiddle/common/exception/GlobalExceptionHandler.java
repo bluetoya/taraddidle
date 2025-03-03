@@ -21,8 +21,9 @@ public class GlobalExceptionHandler {
     }
 
     private ResponseEntity<ErrorResponse> handleExceptionResponse(ErrorCode errorCode) {
-        return ResponseEntity.status(errorCode.getHttpStatus())
-            .body(new ErrorResponse(errorCode.name(), errorCode.getMessage()));
+        return ResponseEntity.badRequest()
+            .body(new ErrorResponse(errorCode.getHttpStatus().value(), errorCode.name(),
+                errorCode.getMessage()));
     }
 
 }
