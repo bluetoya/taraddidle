@@ -6,7 +6,7 @@ import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
-import com.bluetoya.taradiddle.feature.auth.dto.UserDto;
+import com.bluetoya.taradiddle.feature.user.UserDto;
 import com.bluetoya.taradiddle.feature.auth.entity.Auth;
 import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;

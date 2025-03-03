@@ -2,14 +2,12 @@ package com.bluetoya.taradiddle.feature.user;
 
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 
 @Getter
 @Builder
@@ -25,17 +23,6 @@ public class User {
     private LocalDateTime createdAt;
     private String authId;
 
-    public static User of(UserDto user) {
-        return User.builder()
-            .username(user.username())
-            .firstName(user.firstName())
-            .lastName(user.lastName())
-            .friends(Collections.emptyList())
-            .createdAt(DateUtil.now())
-            .authId(user.authId())
-            .build();
-    }
-
     public static User of(SignInRequest request, String authId) {
         return User.builder()
             .username(request.username())
@@ -47,9 +34,9 @@ public class User {
     }
 
     public User update(UserDto user) {
-        this.username = user.username();
-        this.firstName = user.firstName();
-        this.lastName = user.lastName();
+        this.username = user.getUsername();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
         this.createdAt = DateUtil.now();
         return this;
     }
