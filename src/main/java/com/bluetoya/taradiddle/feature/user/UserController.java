@@ -1,6 +1,7 @@
 package com.bluetoya.taradiddle.feature.user;
 
 import com.bluetoya.taradiddle.common.ApiResponse;
+import com.bluetoya.taradiddle.feature.auth.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

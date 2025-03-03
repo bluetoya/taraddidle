@@ -1,5 +1,6 @@
 package com.bluetoya.taradiddle.feature.user;
 
+import com.bluetoya.taradiddle.feature.auth.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class UserService {
     }
 
     public User update(UserDto updatedUser) {
-        User user = userRepository.findByUsername(updatedUser.username());
+        User user = userRepository.findByUsername(updatedUser.getUsername());
         return userRepository.save(user.update(updatedUser));
     }
 
