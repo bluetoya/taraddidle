@@ -15,11 +15,6 @@ public class UserController {
         return userService.getUser(username);
     }
 
-    @PostMapping
-    public User create(@RequestBody UserDto user) {
-        return userService.create(user);
-    }
-
     @PutMapping
     public User update(@RequestBody UserDto user) {
         return userService.update(user);
