@@ -31,6 +31,9 @@ public class AuthServiceImpl implements AuthService {
     public LoginResponse login(LoginRequest request) {
         validator.validateLogin(request);
 
+        String accessToken = jwtProvider.generateAccessToken(request.userId());
+        String refreshToken = jwtProvider.generateRefreshToken(request.userId());
+
         return new LoginResponse(jwtProvider.generateAccessToken(request.userId()));
     }
 

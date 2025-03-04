@@ -20,10 +20,10 @@ public class JwtProvider {
     @Value("${jwt.access-token.expiration}")
     private Integer accessExpiration;
 
-    @Value("${jwt.access-token.secret-key}")
+    @Value("${jwt.refresh-token.secret-key}")
     private String refreshKey;
 
-    @Value("${jwt.access-token.expiration}")
+    @Value("${jwt.refresh-token.expiration}")
     private Integer refreshExpiration;
 
     private SecretKey generateAccessTokenKey() {
