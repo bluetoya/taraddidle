@@ -34,6 +34,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String accessToken = jwtProvider.generateAccessToken(request.userId());
         String refreshToken = jwtProvider.generateRefreshToken(request.userId());
 
+        // TODO :: db에 refresh token insert
+
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("X-Refresh-Token", refreshToken);
 
@@ -54,6 +56,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthResponse refresh(AuthRequest request, HttpServletResponse response) {
+        // TODO :: refresh token 값 비교 후 일치하면 access token과 refresh token 재 생성해서 header에 넣어 보내기
         return null;
     }
 }
