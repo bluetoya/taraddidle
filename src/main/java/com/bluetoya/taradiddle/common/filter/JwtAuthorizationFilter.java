@@ -25,10 +25,6 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
         throws ServletException, IOException {
 
-        if (request.getRequestURI().equals("/auth/login")) {
-            filterChain.doFilter(request, response);
-        }
-
         String token = getTokenFromRequest(request);
 
         if (Objects.nonNull(token)) {

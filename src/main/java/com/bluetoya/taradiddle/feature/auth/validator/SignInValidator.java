@@ -2,7 +2,7 @@ package com.bluetoya.taradiddle.feature.auth.validator;
 
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
-import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
+import com.bluetoya.taradiddle.feature.auth.dto.AuthRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.entity.Auth;
 import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
@@ -17,7 +17,7 @@ public class SignInValidator {
     private final AuthRepository authRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void validateLogin(LoginRequest request) {
+    public void validateLogin(AuthRequest request) {
         Auth auth = authRepository.findByUserId(request.userId())
             .orElseThrow(() -> new CustomException(AuthErrorCode.USER_ID_NOT_FOUND));
 
