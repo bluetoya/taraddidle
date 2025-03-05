@@ -1,10 +1,8 @@
 package com.bluetoya.taradiddle.feature.auth.controller;
 
-import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
-import com.bluetoya.taradiddle.feature.auth.service.AuthService;
-import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
+import com.bluetoya.taradiddle.feature.auth.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthService authService;
-
-    @GetMapping("/login")
-    public LoginResponse login(final @RequestBody LoginRequest request) {
-        return authService.login(request);
-    }
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/sign-in")
     public SignInResponse signIn(final @RequestBody SignInRequest request) {
-        return authService.signIn(request);
+        return authenticationService.signIn(request);
     }
 
 }
