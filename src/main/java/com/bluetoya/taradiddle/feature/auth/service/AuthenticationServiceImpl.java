@@ -3,6 +3,7 @@ package com.bluetoya.taradiddle.feature.auth.service;
 import com.bluetoya.taradiddle.common.security.JwtProvider;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthDto;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
+import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.user.UserDto;
@@ -27,7 +28,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final SignInValidator validator;
 
     @Override
-    public void login(LoginRequest request, HttpServletResponse response) {
+    public LoginResponse login(LoginRequest request, HttpServletResponse response) {
         validator.validateLogin(request);
 
         String accessToken = jwtProvider.generateAccessToken(request.userId());
@@ -35,6 +36,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("X-Refresh-Token", refreshToken);
+
+        return new LoginResponse("로그인 성공했습니다.");
     }
 
     @Override

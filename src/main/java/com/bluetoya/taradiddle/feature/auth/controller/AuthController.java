@@ -2,10 +2,10 @@ package com.bluetoya.taradiddle.feature.auth.controller;
 
 import com.bluetoya.taradiddle.common.ApiResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
+import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.auth.service.AuthenticationService;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
