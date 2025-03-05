@@ -3,7 +3,6 @@ package com.bluetoya.taradiddle.feature.auth.service;
 import com.bluetoya.taradiddle.common.security.JwtProvider;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthDto;
 import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
-import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.UserDto;
@@ -12,13 +11,14 @@ import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
 import com.bluetoya.taradiddle.feature.user.User;
 import com.bluetoya.taradiddle.feature.user.UserRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService {
+public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtProvider jwtProvider;
@@ -26,15 +26,15 @@ public class AuthServiceImpl implements AuthService {
     private final AuthRepository authRepository;
     private final SignInValidator validator;
 
-
     @Override
-    public LoginResponse login(LoginRequest request) {
+    public void login(LoginRequest request, HttpServletResponse response) {
         validator.validateLogin(request);
 
         String accessToken = jwtProvider.generateAccessToken(request.userId());
         String refreshToken = jwtProvider.generateRefreshToken(request.userId());
 
-        return new LoginResponse(jwtProvider.generateAccessToken(request.userId()));
+        response.setHeader("Authorization", "Bearer " + accessToken);
+        response.setHeader("X-Refresh-Token", refreshToken);
     }
 
     @Override
@@ -48,5 +48,4 @@ public class AuthServiceImpl implements AuthService {
 
         return new SignInResponse(AuthDto.from(auth), UserDto.from(user));
     }
-
 }
