@@ -17,7 +17,7 @@ public class AuthController {
 
     private final AuthenticationService authenticationService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ApiResponse<LoginResponse> login(final @RequestBody LoginRequest request, HttpServletResponse response) {
         return new ApiResponse<>(authenticationService.login(request, response));
     }
