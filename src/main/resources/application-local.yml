@@ -8,7 +8,7 @@ spring:
 jwt:
   access-token:
     secret-key: dGxmdGxya3Njb3hsZHhrZmtlbGVtZg==
-    expiration: 25200000
+    expiration: 1800000
   refresh-token:
     secret-key: cmVmcmVzaHRva2VudGFyYWRpZGRsZQ==
-    expiration: 25200000
+    expiration: 604800000
