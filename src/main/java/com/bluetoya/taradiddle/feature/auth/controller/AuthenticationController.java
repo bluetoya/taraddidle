@@ -1,8 +1,8 @@
 package com.bluetoya.taradiddle.feature.auth.controller;
 
 import com.bluetoya.taradiddle.common.ApiResponse;
-import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
-import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
+import com.bluetoya.taradiddle.feature.auth.dto.AuthRequest;
+import com.bluetoya.taradiddle.feature.auth.dto.AuthResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.auth.service.AuthenticationService;
@@ -13,18 +13,23 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
     @PostMapping("/login")
-    public ApiResponse<LoginResponse> login(final @RequestBody LoginRequest request, HttpServletResponse response) {
+    public ApiResponse<AuthResponse> login(final @RequestBody AuthRequest request, HttpServletResponse response) {
         return new ApiResponse<>(authenticationService.login(request, response));
     }
 
     @PostMapping("/sign-in")
     public ApiResponse<SignInResponse> signIn(final @RequestBody SignInRequest request) {
         return new ApiResponse<>(authenticationService.signIn(request));
+    }
+
+    @PostMapping("/refresh")
+    public ApiResponse<AuthResponse> refresh(final @RequestBody AuthRequest request, HttpServletResponse response) {
+        return new ApiResponse<>(authenticationService.refresh(request, response));
     }
 
 }

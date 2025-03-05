@@ -2,8 +2,8 @@ package com.bluetoya.taradiddle.feature.auth.service;
 
 import com.bluetoya.taradiddle.common.security.JwtProvider;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthDto;
-import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
-import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
+import com.bluetoya.taradiddle.feature.auth.dto.AuthRequest;
+import com.bluetoya.taradiddle.feature.auth.dto.AuthResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.user.UserDto;
@@ -28,7 +28,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final SignInValidator validator;
 
     @Override
-    public LoginResponse login(LoginRequest request, HttpServletResponse response) {
+    public AuthResponse login(AuthRequest request, HttpServletResponse response) {
         validator.validateLogin(request);
 
         String accessToken = jwtProvider.generateAccessToken(request.userId());
@@ -37,7 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("X-Refresh-Token", refreshToken);
 
-        return new LoginResponse("로그인 성공했습니다.");
+        return new AuthResponse("로그인 성공했습니다.");
     }
 
     @Override
@@ -50,5 +50,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = userRepository.save(User.of(request, auth.getId()));
 
         return new SignInResponse(AuthDto.from(auth), UserDto.from(user));
+    }
+
+    @Override
+    public AuthResponse refresh(AuthRequest request, HttpServletResponse response) {
+        return null;
     }
 }
