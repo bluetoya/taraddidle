@@ -17,6 +17,7 @@ public class Auth {
     private String userId;
     private String password;
     private LocalDateTime signInDate;
+    private String refreshToken;
 
     public static Auth of(String userId, String password) {
         return Auth.builder().userId(userId).password(password).signInDate(DateUtil.now())
