@@ -16,6 +16,7 @@ public enum AuthErrorCode implements ErrorCode {
     NEED_VARIOUS_CHARACTERS(HttpStatus.BAD_REQUEST, "패스워드에 소문자, 대문자, 숫자가 하나씩 들어가 있어야 합니다."),
     USER_ID_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "이미 존재하는 아이디입니다."),
     WRONG_ACCESS_TOKEN(HttpStatus.UNAUTHORIZED, "존재하지 않거나 만료된 엑세스 토큰입니다."),
+    WRONG_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, "존재하지 않거나 만료된 리프레시 토큰입니다."),
     ;
 
     private final HttpStatus httpStatus;

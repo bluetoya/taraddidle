@@ -6,6 +6,7 @@ import com.bluetoya.taradiddle.feature.auth.dto.AuthResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.auth.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh")
-    public ApiResponse<AuthResponse> refresh(final @RequestBody AuthRequest request, HttpServletResponse response) {
-        return new ApiResponse<>(authenticationService.refresh(request, response));
+    public ApiResponse<AuthResponse> refresh(final @RequestBody AuthRequest authRequest, HttpServletRequest request, HttpServletResponse response) {
+        return new ApiResponse<>(authenticationService.refresh(authRequest, request, response));
     }
 
 }

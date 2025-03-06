@@ -4,6 +4,7 @@ import com.bluetoya.taradiddle.feature.auth.dto.AuthRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public interface AuthenticationService {
@@ -12,5 +13,5 @@ public interface AuthenticationService {
 
     SignInResponse signIn(SignInRequest request);
 
-    AuthResponse refresh(AuthRequest request, HttpServletResponse response);
+    AuthResponse refresh(AuthRequest authRequest, HttpServletRequest request, HttpServletResponse response);
 }
