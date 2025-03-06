@@ -1,5 +1,5 @@
 ### 로그인
-GET {{url}}/auth/login
+POST {{url}}/auth/login
 Content-Type: application/json
 
 {
@@ -18,4 +18,14 @@ Content-Type: application/json
   "username": "",
   "firstName": "",
   "lastName": ""
+}
+
+### 로그인 갱신
+POST {{url}}/auth/refresh
+Content-Type: application/json
+X-Refresh-Token:
+
+{
+  "userId": "",
+  "password": ""
 }

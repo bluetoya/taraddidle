@@ -8,9 +8,9 @@ Content-Type: application/json
 Authorization: Bearer
 
 {
-  "username": "plantLoverBoy",
-  "firstName": "Neville",
-  "lastName": "Longbottom"
+  "username": "",
+  "firstName": "",
+  "lastName": ""
 }
 
 ### 유저 업데이트
@@ -19,9 +19,9 @@ Content-Type: application/json
 Authorization: Bearer
 
 {
-  "username": "BestChestKing1",
-  "firstName": "Ron",
-  "lastName": "Weasley"
+  "username": "",
+  "firstName": "",
+  "lastName": ""
 }
 
 ### 유저 삭제
