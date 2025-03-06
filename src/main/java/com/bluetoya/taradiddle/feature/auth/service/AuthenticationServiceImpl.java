@@ -34,7 +34,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String accessToken = jwtProvider.generateAccessToken(request.userId());
         String refreshToken = jwtProvider.generateRefreshToken(request.userId());
 
-        // TODO :: db에 refresh token insert
+        authRepository.saveRefreshToken(request.userId(), refreshToken);
 
         response.setHeader("Authorization", "Bearer " + accessToken);
         response.setHeader("X-Refresh-Token", refreshToken);
