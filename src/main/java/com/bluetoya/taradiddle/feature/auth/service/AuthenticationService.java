@@ -1,15 +1,17 @@
 package com.bluetoya.taradiddle.feature.auth.service;
 
-import com.bluetoya.taradiddle.feature.auth.dto.LoginRequest;
-import com.bluetoya.taradiddle.feature.auth.dto.LoginResponse;
+import com.bluetoya.taradiddle.feature.auth.dto.AuthRequest;
+import com.bluetoya.taradiddle.feature.auth.dto.AuthResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public interface AuthenticationService {
 
-    LoginResponse login(LoginRequest request, HttpServletResponse response);
+    AuthResponse login(AuthRequest request, HttpServletResponse response);
 
     SignInResponse signIn(SignInRequest request);
 
+    AuthResponse refresh(AuthRequest authRequest, HttpServletRequest request, HttpServletResponse response);
 }
