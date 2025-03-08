@@ -1,5 +1,6 @@
 package com.bluetoya.taradiddle.common.filter;
 
+import com.bluetoya.taradiddle.common.constant.CommonConstant;
 import com.bluetoya.taradiddle.common.security.JwtProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -38,8 +39,8 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     }
 
     private String getTokenFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (Objects.nonNull(bearerToken) && bearerToken.startsWith("Bearer ")) {
+        String bearerToken = request.getHeader(CommonConstant.AUTHENTICATION_TOKEN_HEADER);
+        if (Objects.nonNull(bearerToken) && bearerToken.startsWith(CommonConstant.AUTHENTICATION_TOKEN_BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
         return null;

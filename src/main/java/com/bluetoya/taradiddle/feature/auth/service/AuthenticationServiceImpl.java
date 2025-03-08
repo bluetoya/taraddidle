@@ -3,6 +3,7 @@ package com.bluetoya.taradiddle.feature.auth.service;
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
 import com.bluetoya.taradiddle.common.security.JwtProvider;
+import com.bluetoya.taradiddle.common.constant.CommonConstant;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthDto;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthResponse;
@@ -37,7 +38,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         setTokens(request.userId(), response);
 
-        return new AuthResponse("로그인 성공했습니다.");
+        return new AuthResponse("로그인 성공");
     }
 
     @Override
@@ -55,7 +56,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public AuthResponse refresh(AuthRequest authRequest, HttpServletRequest request,
         HttpServletResponse response) {
-        String refreshToken = request.getHeader("X-Refresh-Token");
+        String refreshToken = request.getHeader(CommonConstant.REFRESH_TOKEN_HEADER);
 
         if (Objects.nonNull(refreshToken)) {
             Auth auth = authRepository.findByUserId(authRequest.userId())
@@ -74,7 +75,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         authRepository.saveRefreshToken(userId, refreshToken);
 
-        response.setHeader("Authorization", "Bearer " + accessToken);
-        response.setHeader("X-Refresh-Token", refreshToken);
+        response.setHeader(CommonConstant.AUTHENTICATION_TOKEN_HEADER, CommonConstant.AUTHENTICATION_TOKEN_BEARER_PREFIX + accessToken);
+        response.setHeader(CommonConstant.REFRESH_TOKEN_HEADER, refreshToken);
     }
 }
