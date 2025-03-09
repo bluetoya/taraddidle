@@ -8,4 +8,5 @@ public interface TokenRepository extends MongoRepository<Token, String>, TokenCu
 
     Optional<Token> findByEmail(String email);
 
+    void deleteByUserId(String userId);
 }

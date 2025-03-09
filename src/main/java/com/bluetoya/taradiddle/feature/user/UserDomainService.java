@@ -41,4 +41,8 @@ public class UserDomainService {
     public void updateLastLoginDate(String email) {
         userRepository.updateLastLoginDate(email);
     }
+
+    public void logout(String userId) {
+        tokenRepository.deleteByUserId(userId);
+    }
 }

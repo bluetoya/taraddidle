@@ -29,3 +29,8 @@ X-Refresh-Token:
   "email": "",
   "password": ""
 }
+
+### 로그아웃
+DELETE {{url}}/auth/logout
+Authorization: Bearer
+X-USER-Id: 67cd4f215c36fa1542dd74d5
