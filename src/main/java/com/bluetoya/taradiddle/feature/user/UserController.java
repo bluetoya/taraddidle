@@ -1,12 +1,14 @@
 package com.bluetoya.taradiddle.feature.user;
 
 import com.bluetoya.taradiddle.common.ApiResponse;
+import com.bluetoya.taradiddle.common.constant.CommonConstant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,18 +19,18 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/{username}")
-    public ApiResponse<User> getUser(@PathVariable String username) {
-        return new ApiResponse<>(userService.getUser(username));
+    @GetMapping
+    public ApiResponse<User> getUser(@RequestHeader(CommonConstant.X_USER_ID) String userId) {
+        return new ApiResponse<>(userService.getUser(userId));
     }
 
     @PutMapping
-    public ApiResponse<User> update(@RequestBody UserDto user) {
-        return new ApiResponse<>(userService.update(user));
+    public ApiResponse<User> update(@RequestHeader(CommonConstant.X_USER_ID) String userId, @RequestBody UserDto user) {
+        return new ApiResponse<>(userService.update(userId, user));
     }
 
-    @DeleteMapping("/{username}")
-    public void delete(@PathVariable String username) {
-        userService.delete(username);
+    @DeleteMapping
+    public void delete(@RequestHeader(CommonConstant.X_USER_ID) String userId) {
+        userService.delete(userId);
     }
 }

@@ -36,7 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         validator.validateLogin(request, user);
 
         setTokens(user.getId(), request.email(), response);
-        userDomainService.updateLastLoginDate(request.email());
+        userDomainService.updateLastLoginDate(user.getId());
 
         return new AuthResponse("로그인 성공");
     }

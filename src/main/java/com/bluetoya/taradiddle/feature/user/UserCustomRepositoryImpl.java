@@ -16,8 +16,8 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public void updateLastLoginDate(String email) {
-        mongoTemplate.updateFirst(query(where("email").is(email)),
+    public void updateLastLoginDate(String userId) {
+        mongoTemplate.updateFirst(query(where("_id").is(userId)),
             update("lastLoginDate", DateUtil.now()), User.class);
     }
 }

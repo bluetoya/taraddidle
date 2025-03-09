@@ -7,21 +7,20 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
     private final UserDomainService userDomainService;
 
-    public User getUser(String email) {
-        return userDomainService.findByEmail(email);
+    public User getUser(String userId) {
+        return userDomainService.findById(userId);
     }
 
-    public User update(UserDto updatedUser) {
+    public User update(String userId, UserDto updatedUser) {
 //        User user = userRepository.findByUsername(updatedUser.getUsername());
 //        return userRepository.save(user.update(updatedUser));
         return null;
     }
 
-    public void delete(String username) {
-        userRepository.deleteByUsername(username);
+    public void delete(String userId) {
+        userDomainService.deleteById(userId);
     }
 
 }

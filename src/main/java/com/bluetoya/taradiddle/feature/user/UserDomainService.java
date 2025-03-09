@@ -38,11 +38,19 @@ public class UserDomainService {
         tokenRepository.upsertRefreshToken(token);
     }
 
-    public void updateLastLoginDate(String email) {
-        userRepository.updateLastLoginDate(email);
+    public void updateLastLoginDate(String userId) {
+        userRepository.updateLastLoginDate(userId);
     }
 
     public void logout(String userId) {
         tokenRepository.deleteByUserId(userId);
+    }
+
+    public User findById(String userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new CustomException(UserErrorCode.USER_NOT_FOUND));
+    }
+
+    public void deleteById(String userId) {
+        userRepository.deleteById(userId);
     }
 }
