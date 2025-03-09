@@ -21,6 +21,10 @@ public class UserDomainService {
             UserErrorCode.USER_NOT_FOUND));
     }
 
+    public boolean existsByEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
     public User saveUser(User user) {
         return userRepository.save(user);
     }
@@ -30,9 +34,8 @@ public class UserDomainService {
             AuthErrorCode.EMAIL_NOT_FOUND));
     }
 
-    public void saveRefreshToken(Token token) {
-        // TODO :: upsert required
-        tokenRepository.save(token);
+    public void updateRefreshToken(Token token) {
+        tokenRepository.upsertRefreshToken(token);
     }
 
     public void updateLastLoginDate(String email) {

@@ -6,7 +6,6 @@ import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.user.UserDomainService;
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -29,7 +28,7 @@ public class UserIdValidator implements Validator<SignInRequest> {
         }
     }
 
-    private boolean alreadyExists(String userId) {
-        return Objects.nonNull(userDomainService.findByEmail(userId));
+    private boolean alreadyExists(String email) {
+        return userDomainService.existsByEmail(email);
     }
 }

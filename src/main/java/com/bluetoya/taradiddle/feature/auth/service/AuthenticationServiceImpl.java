@@ -1,5 +1,6 @@
 package com.bluetoya.taradiddle.feature.auth.service;
 
+import static com.bluetoya.taradiddle.feature.auth.entity.Token.of;
 import static com.bluetoya.taradiddle.feature.user.User.create;
 
 import com.bluetoya.taradiddle.common.constant.CommonConstant;
@@ -32,9 +33,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthResponse login(AuthRequest request, HttpServletResponse response) {
-        validator.validateLogin(request);
+        User user = userDomainService.findByEmail(request.email());
+        validator.validateLogin(request, user);
 
-        setTokens(request.email(), response);
+        setTokens(user.getId(), request.email(), response);
         userDomainService.updateLastLoginDate(request.email());
 
         return new AuthResponse("로그인 성공");
@@ -58,21 +60,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (Objects.nonNull(refreshToken)) {
             Token token = userDomainService.findTokenByEmail(authRequest.email());
             if (token.getRefreshToken().equals(refreshToken)) {
-                setTokens(authRequest.email(), response);
+                setTokens(token.getUserId(), authRequest.email(), response);
                 return new AuthResponse("토큰 갱신 성공");
             }
         }
         throw new CustomException(AuthErrorCode.WRONG_REFRESH_TOKEN);
     }
 
-    private void setTokens(String email, HttpServletResponse response) {
+    private void setTokens(String userId, String email, HttpServletResponse response) {
         String accessToken = jwtProvider.generateAccessToken(email);
         String refreshToken = jwtProvider.generateRefreshToken(email);
 
-        userDomainService.saveRefreshToken(Token.create(email, refreshToken));
+        userDomainService.updateRefreshToken(of(userId, email, refreshToken));
 
         response.setHeader(CommonConstant.AUTHENTICATION_TOKEN_HEADER,
             CommonConstant.AUTHENTICATION_TOKEN_BEARER_PREFIX + accessToken);
         response.setHeader(CommonConstant.REFRESH_TOKEN_HEADER, refreshToken);
+        response.setHeader(CommonConstant.X_USER_ID, userId);
     }
 }

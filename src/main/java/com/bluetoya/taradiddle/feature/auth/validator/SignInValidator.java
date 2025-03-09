@@ -17,9 +17,7 @@ public class SignInValidator {
     private final UserDomainService userDomainService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public void validateLogin(AuthRequest request) {
-        User user = userDomainService.findByEmail(request.email());
-
+    public void validateLogin(AuthRequest request, User user) {
         if (!bCryptPasswordEncoder.matches(request.password(), user.getAuth().getPasswordHash())) {
             throw new CustomException(AuthErrorCode.WRONG_PASSWORD);
         }
