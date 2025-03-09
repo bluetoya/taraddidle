@@ -1,7 +1,10 @@
 package com.bluetoya.taradiddle.feature.user;
 
+import static com.bluetoya.taradiddle.feature.auth.entity.Auth.of;
+
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
+import com.bluetoya.taradiddle.feature.auth.entity.Auth;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
@@ -16,20 +19,22 @@ public class User {
 
     @Id
     private String id;
+    private String email;
     private String username;
     private String firstName;
     private String lastName;
+    private Auth auth;
     private List<String> friends;
     private LocalDateTime createdAt;
-    private String authId;
+    private LocalDateTime updatedAt;
 
-    public static User of(SignInRequest request, String authId) {
+    public static User create(SignInRequest request, String encryptedPassword) {
         return User.builder()
             .username(request.username())
             .firstName(request.firstName())
             .lastName(request.lastName())
-            .createdAt(LocalDateTime.now())
-            .authId(authId)
+            .auth(of(encryptedPassword))
+            .createdAt(DateUtil.now())
             .build();
     }
 
