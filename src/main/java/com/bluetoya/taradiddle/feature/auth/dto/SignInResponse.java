@@ -1,7 +1,7 @@
 package com.bluetoya.taradiddle.feature.auth.dto;
 
-import com.bluetoya.taradiddle.feature.user.UserDto;
+import com.bluetoya.taradiddle.feature.user.User;
 
-public record SignInResponse(AuthDto auth, UserDto user) {
+public record SignInResponse(User user) {
 
 }
