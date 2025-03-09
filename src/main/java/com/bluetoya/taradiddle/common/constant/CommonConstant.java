@@ -9,6 +9,7 @@ public class CommonConstant {
     public static final String AUTHENTICATION_TOKEN_HEADER = "Authorization";
     public static final String AUTHENTICATION_TOKEN_BEARER_PREFIX = "Bearer ";
     public static final String REFRESH_TOKEN_HEADER = "X-Refresh-Token";
+    public static final String X_USER_ID = "X-User-Id";
 
     // Date
     public static final String REGION_ASIA_SEOUL = "Asia/Seoul";

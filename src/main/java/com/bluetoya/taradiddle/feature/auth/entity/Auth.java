@@ -4,23 +4,17 @@ import com.bluetoya.taradiddle.common.util.DateUtil;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Builder
-@Document(collection = "auth")
 public class Auth {
 
-    @Id
-    private String id;
-    private String userId;
-    private String password;
-    private LocalDateTime signInDate;
-    private String refreshToken;
+    private String passwordHash;
+    private LocalDateTime firstSignInDate;
+    private LocalDateTime lastLoginDate;
 
-    public static Auth of(String userId, String password) {
-        return Auth.builder().userId(userId).password(password).signInDate(DateUtil.now())
-            .build();
+    public static Auth of(String password) {
+        return Auth.builder().passwordHash(password).firstSignInDate(DateUtil.now())
+            .lastLoginDate(DateUtil.now()).build();
     }
 }

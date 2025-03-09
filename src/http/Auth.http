@@ -3,7 +3,7 @@ POST {{url}}/auth/login
 Content-Type: application/json
 
 {
-  "userId": "",
+  "email": "hpotter@hogwarts.owl",
   "password": ""
 }
 
@@ -12,12 +12,12 @@ POST {{url}}/auth/sign-in
 Content-Type: application/json
 
 {
-  "userId": "",
+  "email": "hpotter@hogwarts.owl",
   "password": "",
   "confirmPassword": "",
-  "username": "",
-  "firstName": "",
-  "lastName": ""
+  "username": "boltscar731",
+  "firstName": "Harry",
+  "lastName": "Potter"
 }
 
 ### 로그인 갱신
@@ -26,6 +26,6 @@ Content-Type: application/json
 X-Refresh-Token:
 
 {
-  "userId": "",
+  "email": "",
   "password": ""
 }

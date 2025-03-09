@@ -18,15 +18,4 @@ public class UserDto {
     private LocalDateTime createdAt;
     private String authId;
 
-    public static UserDto from(User user) {
-        return UserDto.builder()
-            .username(user.getUsername())
-            .firstName(user.getFirstName())
-            .lastName(user.getLastName())
-            .friends(user.getFriends())
-            .createdAt(user.getCreatedAt())
-            .authId(user.getAuthId())
-            .build();
-    }
-
 }

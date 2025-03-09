@@ -33,4 +33,6 @@ public class AuthenticationController {
         return new ApiResponse<>(authenticationService.refresh(authRequest, request, response));
     }
 
+    // TODO :: logout 추가
+
 }

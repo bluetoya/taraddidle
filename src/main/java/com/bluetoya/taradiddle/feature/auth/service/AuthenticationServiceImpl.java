@@ -1,20 +1,20 @@
 package com.bluetoya.taradiddle.feature.auth.service;
 
+import static com.bluetoya.taradiddle.feature.auth.entity.Token.of;
+import static com.bluetoya.taradiddle.feature.user.User.create;
+
+import com.bluetoya.taradiddle.common.constant.CommonConstant;
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
 import com.bluetoya.taradiddle.common.security.JwtProvider;
-import com.bluetoya.taradiddle.common.constant.CommonConstant;
-import com.bluetoya.taradiddle.feature.auth.dto.AuthDto;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
-import com.bluetoya.taradiddle.feature.auth.entity.Auth;
-import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
+import com.bluetoya.taradiddle.feature.auth.entity.Token;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
 import com.bluetoya.taradiddle.feature.user.User;
-import com.bluetoya.taradiddle.feature.user.UserDto;
-import com.bluetoya.taradiddle.feature.user.UserRepository;
+import com.bluetoya.taradiddle.feature.user.UserDomainService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Objects;
@@ -28,15 +28,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtProvider jwtProvider;
-    private final UserRepository userRepository;
-    private final AuthRepository authRepository;
+    private final UserDomainService userDomainService;
     private final SignInValidator validator;
 
     @Override
     public AuthResponse login(AuthRequest request, HttpServletResponse response) {
-        validator.validateLogin(request);
+        User user = userDomainService.findByEmail(request.email());
+        validator.validateLogin(request, user);
 
-        setTokens(request.userId(), response);
+        setTokens(user.getId(), request.email(), response);
+        userDomainService.updateLastLoginDate(request.email());
 
         return new AuthResponse("로그인 성공");
     }
@@ -45,12 +46,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public SignInResponse signIn(SignInRequest request) {
         validator.validateSignIn(request);
 
-        String encryptedPassword = bCryptPasswordEncoder.encode(request.password());
+        User user = userDomainService.saveUser(
+            create(request, bCryptPasswordEncoder.encode(request.password())));
 
-        Auth auth = authRepository.save(Auth.of(request.userId(), encryptedPassword));
-        User user = userRepository.save(User.of(request, auth.getId()));
-
-        return new SignInResponse(AuthDto.from(auth), UserDto.from(user));
+        return new SignInResponse(user);
     }
 
     @Override
@@ -59,23 +58,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String refreshToken = request.getHeader(CommonConstant.REFRESH_TOKEN_HEADER);
 
         if (Objects.nonNull(refreshToken)) {
-            Auth auth = authRepository.findByUserId(authRequest.userId())
-                .orElseThrow(() -> new CustomException(AuthErrorCode.USER_ID_NOT_FOUND));
-            if (auth.getRefreshToken().equals(refreshToken)) {
-                setTokens(authRequest.userId(), response);
+            Token token = userDomainService.findTokenByEmail(authRequest.email());
+            if (token.getRefreshToken().equals(refreshToken)) {
+                setTokens(token.getUserId(), authRequest.email(), response);
                 return new AuthResponse("토큰 갱신 성공");
             }
         }
         throw new CustomException(AuthErrorCode.WRONG_REFRESH_TOKEN);
     }
 
-    private void setTokens(String userId, HttpServletResponse response) {
-        String accessToken = jwtProvider.generateAccessToken(userId);
-        String refreshToken = jwtProvider.generateRefreshToken(userId);
+    private void setTokens(String userId, String email, HttpServletResponse response) {
+        String accessToken = jwtProvider.generateAccessToken(email);
+        String refreshToken = jwtProvider.generateRefreshToken(email);
 
-        authRepository.saveRefreshToken(userId, refreshToken);
+        userDomainService.updateRefreshToken(of(userId, email, refreshToken));
 
-        response.setHeader(CommonConstant.AUTHENTICATION_TOKEN_HEADER, CommonConstant.AUTHENTICATION_TOKEN_BEARER_PREFIX + accessToken);
+        response.setHeader(CommonConstant.AUTHENTICATION_TOKEN_HEADER,
+            CommonConstant.AUTHENTICATION_TOKEN_BEARER_PREFIX + accessToken);
         response.setHeader(CommonConstant.REFRESH_TOKEN_HEADER, refreshToken);
+        response.setHeader(CommonConstant.X_USER_ID, userId);
     }
 }
