@@ -42,7 +42,7 @@ public class PasswordValidator implements Validator<SignInRequest> {
 
         return lowerCasePassword.contains(request.firstName().toLowerCase()) || lowerCasePassword
             .contains(request.lastName().toLowerCase()) || lowerCasePassword
-            .contains(request.userId().substring(0, request.userId().indexOf("@")))
+            .contains(request.email().substring(0, request.email().indexOf("@")))
             || lowerCasePassword.contains(request.username().toLowerCase());
     }
 

@@ -1,23 +1,23 @@
-package com.bluetoya.taradiddle.feature.auth.repository;
+package com.bluetoya.taradiddle.feature.user;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 import static org.springframework.data.mongodb.core.query.Update.update;
 
-import com.bluetoya.taradiddle.feature.auth.entity.Auth;
+import com.bluetoya.taradiddle.common.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class AuthCustomRepositoryImpl implements AuthCustomRepository {
+public class UserCustomRepositoryImpl implements UserCustomRepository {
 
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public void saveRefreshToken(String userId, String refreshToken) {
-        mongoTemplate.updateFirst(query(where("userId").is(userId)),
-            update("refreshToken", refreshToken), Auth.class);
+    public void updateLastLoginDate(String email) {
+        mongoTemplate.updateFirst(query(where("email").is(email)),
+            update("lastLoginDate", DateUtil.now()), User.class);
     }
 }

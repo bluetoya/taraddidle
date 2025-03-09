@@ -10,11 +10,10 @@ import com.bluetoya.taradiddle.feature.auth.dto.AuthRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.AuthResponse;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
-import com.bluetoya.taradiddle.feature.auth.entity.Auth;
-import com.bluetoya.taradiddle.feature.auth.repository.AuthRepository;
+import com.bluetoya.taradiddle.feature.auth.entity.Token;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
 import com.bluetoya.taradiddle.feature.user.User;
-import com.bluetoya.taradiddle.feature.user.UserRepository;
+import com.bluetoya.taradiddle.feature.user.UserDomainService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Objects;
@@ -28,8 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtProvider jwtProvider;
-    private final UserRepository userRepository;
-    private final AuthRepository authRepository;
+    private final UserDomainService userDomainService;
     private final SignInValidator validator;
 
     @Override
@@ -37,7 +35,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         validator.validateLogin(request);
 
         setTokens(request.email(), response);
-        // TODO :: lastSignIn 업데이트
+        userDomainService.updateLastLoginDate(request.email());
 
         return new AuthResponse("로그인 성공");
     }
@@ -46,7 +44,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public SignInResponse signIn(SignInRequest request) {
         validator.validateSignIn(request);
 
-        User user = userRepository.save(
+        User user = userDomainService.saveUser(
             create(request, bCryptPasswordEncoder.encode(request.password())));
 
         return new SignInResponse(user);
@@ -58,21 +56,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String refreshToken = request.getHeader(CommonConstant.REFRESH_TOKEN_HEADER);
 
         if (Objects.nonNull(refreshToken)) {
-            Auth auth = authRepository.findByUserId(authRequest.email())
-                .orElseThrow(() -> new CustomException(AuthErrorCode.USER_ID_NOT_FOUND));
-            if (auth.getRefreshToken().equals(refreshToken)) {
-                setTokens(authRequest.userId(), response);
+            Token token = userDomainService.findTokenByEmail(authRequest.email());
+            if (token.getRefreshToken().equals(refreshToken)) {
+                setTokens(authRequest.email(), response);
                 return new AuthResponse("토큰 갱신 성공");
             }
         }
         throw new CustomException(AuthErrorCode.WRONG_REFRESH_TOKEN);
     }
 
-    private void setTokens(String userId, HttpServletResponse response) {
-        String accessToken = jwtProvider.generateAccessToken(userId);
-        String refreshToken = jwtProvider.generateRefreshToken(userId);
+    private void setTokens(String email, HttpServletResponse response) {
+        String accessToken = jwtProvider.generateAccessToken(email);
+        String refreshToken = jwtProvider.generateRefreshToken(email);
 
-        authRepository.saveRefreshToken(userId, refreshToken);
+        userDomainService.saveRefreshToken(Token.create(email, refreshToken));
 
         response.setHeader(CommonConstant.AUTHENTICATION_TOKEN_HEADER,
             CommonConstant.AUTHENTICATION_TOKEN_BEARER_PREFIX + accessToken);
