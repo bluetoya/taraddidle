@@ -15,7 +15,6 @@ import com.bluetoya.taradiddle.feature.auth.entity.Token;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
 import com.bluetoya.taradiddle.feature.user.User;
 import com.bluetoya.taradiddle.feature.user.UserDomainService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -53,10 +52,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public AuthResponse refresh(AuthRequest authRequest, HttpServletRequest request,
+    public AuthResponse refresh(AuthRequest authRequest, String refreshToken,
         HttpServletResponse response) {
-        String refreshToken = request.getHeader(CommonConstant.REFRESH_TOKEN_HEADER);
-
         if (Objects.nonNull(refreshToken)) {
             Token token = userDomainService.findTokenByEmail(authRequest.email());
             if (token.getRefreshToken().equals(refreshToken)) {
@@ -65,6 +62,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             }
         }
         throw new CustomException(AuthErrorCode.WRONG_REFRESH_TOKEN);
+    }
+
+    @Override
+    public AuthResponse logout(String userId) {
+        userDomainService.logout(userId);
+
+        return new AuthResponse("로그아웃 성공");
     }
 
     private void setTokens(String userId, String email, HttpServletResponse response) {
