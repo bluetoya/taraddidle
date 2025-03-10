@@ -1,5 +1,6 @@
 package com.bluetoya.taradiddle.feature.user;
 
+import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,16 @@ public class UserService {
         return userDomainService.findById(userId);
     }
 
-    public User update(String userId, UserDto updatedUser) {
-//        User user = userRepository.findByUsername(updatedUser.getUsername());
-//        return userRepository.save(user.update(updatedUser));
-        return null;
+    public String update(String userId, UserDto user) {
+        UpdateResult result = userDomainService.updateUser(userId, user);
+        if (result.getModifiedCount() > 0) {
+            return "User updated successfully";
+        } else {
+            return "User update failed";
+        }
     }
+
+    // TODO :: update password
 
     public void delete(String userId) {
         userDomainService.deleteById(userId);

@@ -5,7 +5,6 @@ import com.bluetoya.taradiddle.common.constant.CommonConstant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -25,7 +24,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ApiResponse<User> update(@RequestHeader(CommonConstant.X_USER_ID) String userId, @RequestBody UserDto user) {
+    public ApiResponse<String> update(@RequestHeader(CommonConstant.X_USER_ID) String userId, @RequestBody UserDto user) {
         return new ApiResponse<>(userService.update(userId, user));
     }
 

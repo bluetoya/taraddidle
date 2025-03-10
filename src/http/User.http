@@ -1,11 +1,13 @@
 ### 유저 가져오기
 GET {{url}}/users/boltscar713
 Authorization: Bearer
+X-User-Id:
 
 ### 유저 생성
 POST {{url}}/users
 Content-Type: application/json
 Authorization: Bearer
+X-User-Id:
 
 {
   "username": "",
@@ -17,13 +19,14 @@ Authorization: Bearer
 PUT {{url}}/users
 Content-Type: application/json
 Authorization: Bearer
+X-User-Id:
 
 {
-  "username": "",
-  "firstName": "",
-  "lastName": ""
+  "firstName": "harry",
+  "lastName": "potter"
 }
 
 ### 유저 삭제
 DELETE {{url}}/users/boltscar731
 Authorization: Bearer
+X-User-Id:

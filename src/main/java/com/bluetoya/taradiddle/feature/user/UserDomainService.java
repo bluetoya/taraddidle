@@ -5,6 +5,7 @@ import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
 import com.bluetoya.taradiddle.common.exception.errorcode.UserErrorCode;
 import com.bluetoya.taradiddle.feature.auth.entity.Token;
 import com.bluetoya.taradiddle.feature.auth.repository.TokenRepository;
+import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +53,9 @@ public class UserDomainService {
 
     public void deleteById(String userId) {
         userRepository.deleteById(userId);
+    }
+
+    public UpdateResult updateUser(String userId, UserDto user) {
+        return userRepository.updateUser(userId, user);
     }
 }
