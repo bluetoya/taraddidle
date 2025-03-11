@@ -9,7 +9,13 @@ import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.auth.service.AuthenticationService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,9 +43,9 @@ public class AuthenticationController {
             authenticationService.refresh(authRequest, refreshToken, response));
     }
 
-    @DeleteMapping("/logout")
+    @DeleteMapping("/logout/{userId}")
     public ApiResponse<AuthResponse> logout(
-        @RequestHeader(CommonConstant.X_USER_ID) String userId) {
+        final @PathVariable String userId) {
         return new ApiResponse<>(authenticationService.logout(userId));
     }
 

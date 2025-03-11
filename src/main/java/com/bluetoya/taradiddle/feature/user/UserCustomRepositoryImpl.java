@@ -36,4 +36,14 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
 
         return mongoTemplate.updateFirst(query, update, User.class);
     }
+
+    @Override
+    public UpdateResult updatePassword(String userId, String password) {
+        Query query = new Query(Criteria.where("_id").is(userId));
+
+        Update update = new Update()
+            .set("passwordHash", password);
+
+        return mongoTemplate.updateFirst(query, update, User.class);
+    }
 }

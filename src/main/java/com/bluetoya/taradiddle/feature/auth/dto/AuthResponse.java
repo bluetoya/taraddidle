@@ -1,5 +1,5 @@
 package com.bluetoya.taradiddle.feature.auth.dto;
 
-public record AuthResponse(String message) {
+public record AuthResponse(String message, String userId) {
 
 }

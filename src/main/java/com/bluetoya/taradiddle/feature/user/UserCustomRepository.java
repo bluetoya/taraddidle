@@ -7,4 +7,6 @@ public interface UserCustomRepository {
     void updateLastLoginDate(String email);
 
     UpdateResult updateUser(String userId, UserDto user);
+
+    UpdateResult updatePassword(String userId, String password);
 }

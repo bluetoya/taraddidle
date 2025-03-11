@@ -58,4 +58,8 @@ public class UserDomainService {
     public UpdateResult updateUser(String userId, UserDto user) {
         return userRepository.updateUser(userId, user);
     }
+
+    public UpdateResult updatePassword(String userId, String password) {
+        return userRepository.updatePassword(userId, password);
+    }
 }
