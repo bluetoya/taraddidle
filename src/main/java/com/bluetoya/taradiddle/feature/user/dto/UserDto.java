@@ -1,4 +1,4 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

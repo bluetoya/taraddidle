@@ -1,7 +1,7 @@
 package com.bluetoya.taradiddle.feature.auth.service;
 
 import static com.bluetoya.taradiddle.feature.auth.entity.Token.of;
-import static com.bluetoya.taradiddle.feature.user.User.create;
+import static com.bluetoya.taradiddle.feature.user.entity.User.create;
 
 import com.bluetoya.taradiddle.common.constant.CommonConstant;
 import com.bluetoya.taradiddle.common.exception.CustomException;
@@ -14,8 +14,8 @@ import com.bluetoya.taradiddle.feature.auth.dto.SignInResponse;
 import com.bluetoya.taradiddle.feature.auth.entity.Token;
 import com.bluetoya.taradiddle.feature.auth.validator.BCryptValidator;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
-import com.bluetoya.taradiddle.feature.user.User;
-import com.bluetoya.taradiddle.feature.user.UserDomainService;
+import com.bluetoya.taradiddle.feature.user.entity.User;
+import com.bluetoya.taradiddle.feature.user.service.UserDomainService;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;

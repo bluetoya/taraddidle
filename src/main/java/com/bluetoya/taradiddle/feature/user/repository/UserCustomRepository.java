@@ -1,5 +1,6 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.repository;
 
+import com.bluetoya.taradiddle.feature.user.dto.UserDto;
 import com.mongodb.client.result.UpdateResult;
 
 public interface UserCustomRepository {

@@ -5,7 +5,7 @@ import static com.bluetoya.taradiddle.common.util.RegexUtil.isEmailFormat;
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
-import com.bluetoya.taradiddle.feature.user.UserDomainService;
+import com.bluetoya.taradiddle.feature.user.service.UserDomainService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

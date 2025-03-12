@@ -1,6 +1,10 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.controller;
 
 import com.bluetoya.taradiddle.common.ApiResponse;
+import com.bluetoya.taradiddle.feature.user.dto.PasswordChangeRequest;
+import com.bluetoya.taradiddle.feature.user.dto.UserDto;
+import com.bluetoya.taradiddle.feature.user.dto.UserResponse;
+import com.bluetoya.taradiddle.feature.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

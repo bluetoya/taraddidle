@@ -1,10 +1,13 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.service;
 
 import com.bluetoya.taradiddle.common.exception.CustomException;
 import com.bluetoya.taradiddle.common.exception.errorcode.AuthErrorCode;
 import com.bluetoya.taradiddle.common.exception.errorcode.UserErrorCode;
 import com.bluetoya.taradiddle.feature.auth.entity.Token;
 import com.bluetoya.taradiddle.feature.auth.repository.TokenRepository;
+import com.bluetoya.taradiddle.feature.user.entity.User;
+import com.bluetoya.taradiddle.feature.user.dto.UserDto;
+import com.bluetoya.taradiddle.feature.user.repository.UserRepository;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

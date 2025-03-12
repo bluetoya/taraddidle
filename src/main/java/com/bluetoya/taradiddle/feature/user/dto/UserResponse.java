@@ -1,5 +1,6 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.dto;
 
+import com.bluetoya.taradiddle.feature.user.entity.User;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;

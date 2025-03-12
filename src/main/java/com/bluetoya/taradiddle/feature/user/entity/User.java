@@ -1,10 +1,11 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.entity;
 
 import static com.bluetoya.taradiddle.feature.auth.entity.Auth.of;
 
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.entity.Auth;
+import com.bluetoya.taradiddle.feature.user.dto.UserDto;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;

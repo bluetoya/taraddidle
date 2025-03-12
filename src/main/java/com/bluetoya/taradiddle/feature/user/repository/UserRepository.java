@@ -1,5 +1,6 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.repository;
 
+import com.bluetoya.taradiddle.feature.user.entity.User;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

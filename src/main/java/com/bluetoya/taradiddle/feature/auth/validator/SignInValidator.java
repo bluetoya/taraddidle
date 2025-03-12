@@ -1,7 +1,7 @@
 package com.bluetoya.taradiddle.feature.auth.validator;
 
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
-import com.bluetoya.taradiddle.feature.user.UserDomainService;
+import com.bluetoya.taradiddle.feature.user.service.UserDomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

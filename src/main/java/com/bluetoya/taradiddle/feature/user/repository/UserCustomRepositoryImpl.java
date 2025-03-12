@@ -1,10 +1,12 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.repository;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 import static org.springframework.data.mongodb.core.query.Update.update;
 
 import com.bluetoya.taradiddle.common.util.DateUtil;
+import com.bluetoya.taradiddle.feature.user.entity.User;
+import com.bluetoya.taradiddle.feature.user.dto.UserDto;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;

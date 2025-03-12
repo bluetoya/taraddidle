@@ -1,6 +1,6 @@
-package com.bluetoya.taradiddle.feature.user;
+package com.bluetoya.taradiddle.feature.user.controller;
 
-import com.bluetoya.taradiddle.common.ApiResponse;
+import com.bluetoya.taradiddle.feature.user.service.FriendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
