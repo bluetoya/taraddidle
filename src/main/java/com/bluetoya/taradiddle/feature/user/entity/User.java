@@ -5,7 +5,6 @@ import static com.bluetoya.taradiddle.feature.auth.entity.Auth.of;
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.entity.Auth;
-import com.bluetoya.taradiddle.feature.user.dto.UserDto;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -39,14 +38,6 @@ public class User {
             .friends(Collections.emptyList())
             .updatedAt(DateUtil.now())
             .build();
-    }
-
-    public User update(UserDto user) {
-        this.username = user.getUsername();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.updatedAt = DateUtil.now();
-        return this;
     }
 
     public User addFriend(String friend) {
