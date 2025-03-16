@@ -32,7 +32,7 @@ public class UserController {
         return new ApiResponse<>(userService.update(userId, user));
     }
 
-    @PatchMapping("{/userId}")
+    @PatchMapping("/{userId}")
     public ApiResponse<String> updatePassword(@PathVariable String userId, @RequestBody PasswordChangeRequest passwordChangeRequest) {
         return new ApiResponse<>(userService.updatePassword(userId, passwordChangeRequest));
     }
