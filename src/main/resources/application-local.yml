@@ -4,15 +4,7 @@ spring:
       on-profile: local
   data:
     mongodb:
-      uri: mongodb://localhost:27017/taradiddle
-      host: localhost
-      port: 27017
-      database: taradiddle
-      pool-min-size: 0 # default
-      pool-max-size: 100 # default
-      connection-time-out: 10
-      max-wait-time: 30
-      read-time-out: 5
+      uri: mongodb://127.0.0.1:27017/taradiddle?replicaSet=rs0
 jwt:
   access-token:
     secret-key: dGxmdGxya3Njb3hsZHhrZmtlbGVtZg==
