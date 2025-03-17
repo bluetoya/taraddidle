@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "email": "hpotter@hogwarts.owl",
-  "password": "boyWhoLived1"
+  "password": ""
 }
 
 ### 회원가입
@@ -14,7 +14,7 @@ Content-Type: application/json
 {
   "email": "hpotter@hogwarts.owl",
   "password": "",
-  "confirmPassword": "",
+  "confirmPassword": "boyWhoLived1234",
   "username": "boltscar731",
   "firstName": "Harry",
   "lastName": "Potter"
