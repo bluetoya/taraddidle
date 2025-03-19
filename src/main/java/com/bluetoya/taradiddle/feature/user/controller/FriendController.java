@@ -14,13 +14,13 @@ public class FriendController {
 
     private final FriendService friendService;
 
-    @PatchMapping("/{username}")
-    public ApiResponse<User> addFriend(@PathVariable String username, @RequestBody FriendDto friend) {
+    @PatchMapping("/{userId}")
+    public ApiResponse<User> addFriend(@PathVariable String userId, @RequestBody FriendDto friend) {
         return new ApiResponse<>(null);
     }
 
-    @DeleteMapping("/{username}")
-    public ApiResponse<User> remove(@PathVariable String username, @RequestBody FriendDto friend) {
+    @DeleteMapping("/{userId}")
+    public ApiResponse<User> remove(@PathVariable String userId, @RequestBody FriendDto friend) {
         return new ApiResponse<>(null);
     }
 

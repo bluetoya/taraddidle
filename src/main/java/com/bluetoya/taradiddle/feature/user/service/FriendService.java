@@ -1,5 +1,7 @@
 package com.bluetoya.taradiddle.feature.user.service;
 
+import com.bluetoya.taradiddle.feature.user.dto.FriendDto;
+import com.bluetoya.taradiddle.feature.user.entity.User;
 import com.bluetoya.taradiddle.feature.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,12 +10,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class FriendService {
 
-    private final UserRepository userRepository;
+    private final UserDomainService userDomainService;
 
-//    public User addFriend(String username, FriendDto friend) {
-//        User user = userRepository.findByUsername(username);
-//        return userRepository.save(user.addFriend(friend.name()));
-//    }
+    public User addFriend(String userId, FriendDto friend) {
+        User user = userDomainService.findById(userId);
+        return null;
+//        return userDomainService.save(user.addFriend(friend.name()));
+    }
 //
 //    public User removeFriend(String username, FriendDto friend) {
 //        User user = userRepository.findByUsername(username);
