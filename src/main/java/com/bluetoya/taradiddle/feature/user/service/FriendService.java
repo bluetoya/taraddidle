@@ -14,8 +14,8 @@ public class FriendService {
 
     public User addFriend(String userId, FriendDto friend) {
         User user = userDomainService.findById(userId);
-        return null;
-//        return userDomainService.save(user.addFriend(friend.name()));
+
+        return userDomainService.saveUser(user.addFriend(friend.name()));
     }
 //
 //    public User removeFriend(String username, FriendDto friend) {
