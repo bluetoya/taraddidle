@@ -18,8 +18,4 @@ public class FriendService {
         return userDomainService.saveUser(user.addFriend(friend.name()));
     }
 
-    public User removeFriend(String userId, FriendDto friend) {
-        User user = userDomainService.findById(userId);
-        return userDomainService.saveUser(user.removeFriend(friend.name()));
-    }
 }
