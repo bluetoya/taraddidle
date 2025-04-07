@@ -16,6 +16,7 @@ import com.bluetoya.taradiddle.feature.auth.validator.BCryptValidator;
 import com.bluetoya.taradiddle.feature.auth.validator.SignInValidator;
 import com.bluetoya.taradiddle.feature.user.entity.User;
 import com.bluetoya.taradiddle.feature.user.service.UserDomainService;
+import com.mongodb.client.result.UpdateResult;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         bCryptValidator.validatePassword(request.password(), user.getAuth().getPasswordHash());
 
         setTokens(user.getId(), request.email(), response);
-        userDomainService.updateLastLoginDate(user.getId());
+        UpdateResult result = userDomainService.updateLoginInfo(user.getId());
+
+        if (result.getModifiedCount() > 0) {
+            throw new CustomException(AuthErrorCode.LOGIN_FAILED);
+        }
 
         return new AuthResponse("로그인 성공", user.getId());
     }

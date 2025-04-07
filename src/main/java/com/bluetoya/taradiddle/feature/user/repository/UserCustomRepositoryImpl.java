@@ -7,6 +7,7 @@ import static org.springframework.data.mongodb.core.query.Update.update;
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import com.bluetoya.taradiddle.feature.user.entity.User;
 import com.bluetoya.taradiddle.feature.user.dto.UserDto;
+import com.bluetoya.taradiddle.feature.user.enums.UserStatus;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -22,9 +23,14 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public void updateLastLoginDate(String userId) {
-        mongoTemplate.updateFirst(query(where("_id").is(userId)),
-            update("lastLoginDate", DateUtil.now()), User.class);
+    public UpdateResult updateLoginInfo(String userId) {
+        Query query = query(where("_id").is(userId));
+
+        Update update = new Update()
+            .set("status", UserStatus.ONLINE)
+            .set("lastLoginDate", DateUtil.now());
+
+        return mongoTemplate.updateFirst(query, update, User.class);
     }
 
     @Override

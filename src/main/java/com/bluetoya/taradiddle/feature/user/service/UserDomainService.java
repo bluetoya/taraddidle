@@ -42,8 +42,8 @@ public class UserDomainService {
         tokenRepository.upsertRefreshToken(token);
     }
 
-    public void updateLastLoginDate(String userId) {
-        userRepository.updateLastLoginDate(userId);
+    public UpdateResult updateLoginInfo(String userId) {
+        return userRepository.updateLoginInfo(userId);
     }
 
     public void logout(String userId) {

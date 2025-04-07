@@ -5,7 +5,7 @@ import com.mongodb.client.result.UpdateResult;
 
 public interface UserCustomRepository {
 
-    void updateLastLoginDate(String email);
+    UpdateResult updateLoginInfo(String email);
 
     UpdateResult updateUser(String userId, UserDto user);
 
