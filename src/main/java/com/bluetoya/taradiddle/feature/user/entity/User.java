@@ -5,6 +5,7 @@ import static com.bluetoya.taradiddle.feature.auth.entity.Auth.of;
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import com.bluetoya.taradiddle.feature.auth.dto.SignInRequest;
 import com.bluetoya.taradiddle.feature.auth.entity.Auth;
+import com.bluetoya.taradiddle.feature.user.enums.UserStatus;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +25,7 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
+    private UserStatus userStatus;
     private Auth auth;
     private List<String> friends;
     private LocalDateTime updatedAt;
