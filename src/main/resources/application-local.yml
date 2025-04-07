@@ -4,7 +4,7 @@ spring:
       on-profile: local
   data:
     mongodb:
-      uri: mongodb://127.0.0.1:27017/taradiddle?replicaSet=rs0
+      uri: mongodb://localhost:27017/taradiddle
 jwt:
   access-token:
     secret-key: dGxmdGxya3Njb3hsZHhrZmtlbGVtZg==
