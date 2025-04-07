@@ -7,6 +7,7 @@ import com.bluetoya.taradiddle.feature.auth.entity.Token;
 import com.bluetoya.taradiddle.feature.auth.repository.TokenRepository;
 import com.bluetoya.taradiddle.feature.user.entity.User;
 import com.bluetoya.taradiddle.feature.user.dto.UserDto;
+import com.bluetoya.taradiddle.feature.user.enums.UserStatus;
 import com.bluetoya.taradiddle.feature.user.repository.UserRepository;
 import com.mongodb.client.result.UpdateResult;
 import lombok.RequiredArgsConstructor;
@@ -42,11 +43,12 @@ public class UserDomainService {
         tokenRepository.upsertRefreshToken(token);
     }
 
-    public UpdateResult updateLoginInfo(String userId) {
-        return userRepository.updateLoginInfo(userId);
+    public UpdateResult updateLoginInfo(String userId, UserStatus status) {
+        return userRepository.updateLoginInfo(userId, status);
     }
 
     public void logout(String userId) {
+        updateLoginInfo(userId, UserStatus.OFFLINE);
         tokenRepository.deleteByUserId(userId);
     }
 

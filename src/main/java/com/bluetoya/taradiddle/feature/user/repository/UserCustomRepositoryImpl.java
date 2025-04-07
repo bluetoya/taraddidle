@@ -2,7 +2,6 @@ package com.bluetoya.taradiddle.feature.user.repository;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
-import static org.springframework.data.mongodb.core.query.Update.update;
 
 import com.bluetoya.taradiddle.common.util.DateUtil;
 import com.bluetoya.taradiddle.feature.user.entity.User;
@@ -23,12 +22,15 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
     private final MongoTemplate mongoTemplate;
 
     @Override
-    public UpdateResult updateLoginInfo(String userId) {
+    public UpdateResult updateLoginInfo(String userId, UserStatus status) {
         Query query = query(where("_id").is(userId));
 
         Update update = new Update()
-            .set("status", UserStatus.ONLINE)
-            .set("lastLoginDate", DateUtil.now());
+            .set("status", status);
+
+        if (status == UserStatus.ONLINE) {
+            update.set("lastLoginDate", DateUtil.now());
+        }
 
         return mongoTemplate.updateFirst(query, update, User.class);
     }

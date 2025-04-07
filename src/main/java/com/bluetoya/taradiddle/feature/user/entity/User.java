@@ -36,6 +36,7 @@ public class User {
             .username(request.username())
             .firstName(request.firstName())
             .lastName(request.lastName())
+            .userStatus(UserStatus.OFFLINE)
             .auth(of(encryptedPassword))
             .friends(Collections.emptyList())
             .updatedAt(DateUtil.now())
