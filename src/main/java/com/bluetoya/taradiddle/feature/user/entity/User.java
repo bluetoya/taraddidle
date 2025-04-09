@@ -28,6 +28,7 @@ public class User {
     private UserStatus userStatus;
     private Auth auth;
     private List<String> friends;
+    private List<String> blockedUsers;
     private LocalDateTime updatedAt;
 
     public static User create(SignInRequest request, String encryptedPassword) {
@@ -39,6 +40,7 @@ public class User {
             .userStatus(UserStatus.OFFLINE)
             .auth(of(encryptedPassword))
             .friends(Collections.emptyList())
+            .blockedUsers(Collections.emptyList())
             .updatedAt(DateUtil.now())
             .build();
     }
