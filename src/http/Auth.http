@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "email": "hpotter@hogwarts.owl",
-  "password": ""
+  "password": "boyWhoLived1234"
 }
 
 ### 회원가입
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
   "email": "hpotter@hogwarts.owl",
-  "password": "",
+  "password": "boyWhoLived1234",
   "confirmPassword": "boyWhoLived1234",
   "username": "boltscar731",
   "firstName": "Harry",
@@ -31,6 +31,6 @@ X-Refresh-Token:
 }
 
 ### 로그아웃
-DELETE {{url}}/auth/logout/67cd4f215c36fa1542dd74d5
+DELETE {{url}}/auth/logout/67f3df8ffea77a13964d946a
 Authorization: Bearer
 

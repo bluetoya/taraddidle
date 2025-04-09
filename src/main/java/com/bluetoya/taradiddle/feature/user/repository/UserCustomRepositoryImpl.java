@@ -8,7 +8,11 @@ import com.bluetoya.taradiddle.feature.user.entity.User;
 import com.bluetoya.taradiddle.feature.user.dto.UserDto;
 import com.bluetoya.taradiddle.feature.user.enums.UserStatus;
 import com.mongodb.client.result.UpdateResult;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -53,6 +57,32 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
 
         Update update = new Update()
             .set("passwordHash", password);
+
+        return mongoTemplate.updateFirst(query, update, User.class);
+    }
+
+    @Override
+    public List<String> findBlockedUsers(String userId) {
+        Query query = new Query(Criteria.where("_id").is(new ObjectId(userId)));
+        query.fields().include("blockedUsers");
+
+        User user = mongoTemplate.findOne(query, User.class);
+
+        return Objects.nonNull(user) ? user.getBlockedUsers() : Collections.emptyList();
+    }
+
+    @Override
+    public UpdateResult blockUser(String userId, String blockUserId) {
+        Query query = new Query(Criteria.where("_id").is(new ObjectId(userId)));
+        Update update = new Update().addToSet("blockedUsers", blockUserId);
+
+        return mongoTemplate.updateFirst(query, update, User.class);
+    }
+
+    @Override
+    public UpdateResult unblockUser(String userId, String blockUserId) {
+        Query query = new Query(Criteria.where("_id").is(new ObjectId(userId)));
+        Update update = new Update().pull("blockedUsers", blockUserId);
 
         return mongoTemplate.updateFirst(query, update, User.class);
     }

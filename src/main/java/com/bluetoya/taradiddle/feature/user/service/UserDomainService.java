@@ -10,6 +10,7 @@ import com.bluetoya.taradiddle.feature.user.dto.UserDto;
 import com.bluetoya.taradiddle.feature.user.enums.UserStatus;
 import com.bluetoya.taradiddle.feature.user.repository.UserRepository;
 import com.mongodb.client.result.UpdateResult;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -66,5 +67,17 @@ public class UserDomainService {
 
     public UpdateResult updatePassword(String userId, String password) {
         return userRepository.updatePassword(userId, password);
+    }
+
+    public List<String> getBlockedUsers(String userId) {
+        return userRepository.findBlockedUsers(userId);
+    }
+
+    public UpdateResult blockUser(String userId, String blockUserId) {
+        return userRepository.blockUser(userId, blockUserId);
+    }
+
+    public UpdateResult unblockUser(String userId, String blockUserId) {
+        return userRepository.unblockUser(userId, blockUserId);
     }
 }
