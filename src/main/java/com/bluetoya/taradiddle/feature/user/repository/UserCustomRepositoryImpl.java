@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -63,7 +62,7 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
 
     @Override
     public List<String> findBlockedUsers(String userId) {
-        Query query = new Query(Criteria.where("_id").is(new ObjectId(userId)));
+        Query query = new Query(Criteria.where("email").is(userId));
         query.fields().include("blockedUsers");
 
         User user = mongoTemplate.findOne(query, User.class);
@@ -73,7 +72,7 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
 
     @Override
     public UpdateResult blockUser(String userId, String blockUserId) {
-        Query query = new Query(Criteria.where("_id").is(new ObjectId(userId)));
+        Query query = new Query(Criteria.where("email").is(userId));
         Update update = new Update().addToSet("blockedUsers", blockUserId);
 
         return mongoTemplate.updateFirst(query, update, User.class);
@@ -81,7 +80,7 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
 
     @Override
     public UpdateResult unblockUser(String userId, String blockUserId) {
-        Query query = new Query(Criteria.where("_id").is(new ObjectId(userId)));
+        Query query = new Query(Criteria.where("email").is(userId));
         Update update = new Update().pull("blockedUsers", blockUserId);
 
         return mongoTemplate.updateFirst(query, update, User.class);

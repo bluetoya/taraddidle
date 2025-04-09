@@ -23,9 +23,6 @@ public class UserBlockService {
         // 이미 차단된 유저인지 체크
 
         UpdateResult result = userDomainService.blockUser(userId, blockUserId);
-
-        log.info("matchedCount :: {}", result.getMatchedCount());
-        log.info("ModifiedCount :: {}", result.getModifiedCount());
         if (result.getModifiedCount() > 0) {
             return "유저 차단 성공";
         }
