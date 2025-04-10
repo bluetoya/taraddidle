@@ -21,17 +21,34 @@ public class UserBlockController {
 
     private final UserBlockService userBlockService;
 
+    /**
+     * 차단한 유저 리스트 조회
+     * @param userId 유저 이메일
+     * @return List<String>
+     */
     @GetMapping
     public ApiResponse<List<String>> getBlockedUsers(@AuthenticationPrincipal String userId) {
         log.info("Get blocked users for {}", userId);
         return new ApiResponse<>(userBlockService.getBlockedUsers(userId));
     }
 
+    /**
+     * 유저 차단
+     * @param userId 유저 아이디
+     * @param blockUserId 차단할 유저 아이디
+     * @return String
+     */
     @PostMapping("/{blockUserId}")
     public ApiResponse<String> blockUser(@AuthenticationPrincipal String userId, @PathVariable String blockUserId) {
         return new ApiResponse<>(userBlockService.addBlockUser(userId, blockUserId));
     }
 
+    /**
+     * 유저 차단 해제
+     * @param userId 유저 아이디
+     * @param blockUserId 차단했던 유저 아이디
+     * @return String
+     */
     @DeleteMapping("/{blockUserId}")
     public ApiResponse<String> unblockUser(@AuthenticationPrincipal String userId, @PathVariable String blockUserId) {
         return new ApiResponse<>(userBlockService.unblockUser(userId, blockUserId));
